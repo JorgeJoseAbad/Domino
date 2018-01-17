@@ -30,7 +30,7 @@ body{
 
 }
 
-.cell-board {
+.cell-board{
   background-size: contain;
   box-sizing: border-box;
   float: left;
@@ -61,6 +61,49 @@ body{
   background-color: #E3D4AB;
 }
 
+.rotableDragable{
+  position: absolute;
+  background-size: contain;
+  box-sizing: border-box;
+  float: left;
+  height: 40px;
+  width: 20px;
+  background-color: white;
+}
+
+.rotated1 {
+    -ms-transform:rotate(90deg);
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform:rotate(90deg);
+     transform:rotate(90deg);
+}
+
+
+.rotated2 {
+    -ms-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+     transform:rotate(180deg);
+}
+
+
+.rotated3 {
+    -ms-transform:rotate(270deg);
+    -webkit-transform:rotate(270deg);
+    -moz-transform:rotate(270deg);
+    -o-transform:rotate(270deg);
+    transform:rotate(270deg);
+}
+
+.rotated4 {
+    -ms-transform:rotate(360deg);
+    -webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+     transform:rotate(360deg);
+}
 
 .player{
   height: 80px;

@@ -1,6 +1,4 @@
 
-
-
     function DominoGame(options){
       this.playerOne=options.playerOne;
       this.playerTwo=options.playerTwo;
@@ -103,11 +101,18 @@ DominoGame.prototype.selecDominoPlayerOne=function(){
       var numberSelectedDomino;
       numberSelectedDomino=$(this).attr('picknumber');
 
+      /*new no se si sirve para algo*/
+      $('.dominoplayerone.filled[picknumber="'+numberSelectedDomino+'"]').mouseup(
+              console.log("he soltado el dragable",numberSelectedDomino)
+          );
+      /**/
+
       selectedDomino=dominoGame.playerOne.body.splice(numberSelectedDomino,1)[0];
+      console.log("selectedDomino del player 1 es",selectedDomino);
       dominoGame.playerOne.removePlayerDominoes();
       dominoGame.playerOne.showPlayerDominoes();
-      dominoGame.placeDominoInBoard(selectedDomino,dominoGame.playerOne.name);
-
+      dominoGame.dragRotableDomino(selectedDomino,dominoGame.playerOne.name);
+//ojo aqui la prueba cambiando la funcion de destino del domino seleccionado
     });
 
 };
@@ -141,18 +146,18 @@ DominoGame.prototype.selecDominoPlayerTwo=function(){
       var numberSelectedDomino;
       numberSelectedDomino=$(this).attr('picknumber');
 
-      /*new*/
+      /*new solo vale ahora como indicacion de que he herealizado clik en tal elemento*/
       $('.dominoplayerone.filled[picknumber="'+numberSelectedDomino+'"]').mouseup(
-              console.log("he soltado el dragable")
+              console.log("he soltado el dragable",numberSelectedDomino)
           );
       /**/
 
       selectedDomino=dominoGame.playerTwo.body.splice(numberSelectedDomino,1)[0];
-      console.log(selectedDomino);
+      console.log("selected domino del player2 es:",selectedDomino);
       dominoGame.playerTwo.removePlayerDominoes();
       dominoGame.playerTwo.showPlayerDominoes();
-      dominoGame.placeDominoInBoard(selectedDomino,dominoGame.playerTwo.name);
-
+      dominoGame.dragRotableDomino(selectedDomino,dominoGame.playerTwo.name);
+//prueba aqui poniendo dragRotableDomino
     }); //end onclick event
 
   }; // End selectedDomino function
@@ -210,6 +215,152 @@ DominoGame.prototype.drawNumbersInBoard=function(position,number){
 
 };
 
+/*nueva funcion dragRotableDomino que en vez de detectar el click para ver si
+puede dibujar ahí la pieza
+lo que hace es crear una div rotable y dragable*/
+DominoGame.prototype.dragRotableDomino=function(domSelected,name){
+  console.log("he llegado a dragRotableDomino",domSelected);
+  console.log(name);
+  var conta=1;
+  //crea en .boardtable una division con atributos de rotable y draggable
+$('.boardtable').on('click','.cell-board',function(){
+    console.log("evento onclidk");
+    console.log(this); // with,'.cell-board', this is now the cell-board where i clicked
+    dataRow=parseInt($(this).attr('data-row'));
+    dataCol=parseInt($(this).attr('data-col'));
+    console.log(dataRow);
+    console.log(dataCol);
+    $('.boardtable').append($('<div>')
+      .addClass('rotableDragable')
+      .attr('data-row', dataRow) //takes as atributos the datrow y datacol donde hago click
+      .attr('data-col', dataCol)
+    );
+
+   $('.boardtable .rotableDragable').append($('<div>')
+     .addClass('dominonumberplaced')
+     .attr('dominonumber',1)
+
+   );
+   $('.boardtable .rotableDragable').append($('<div>')
+     .addClass('dominonumberplaced')
+     .attr('dominonumber',2)
+
+   );
+   $('.dominonumberplaced').append($("<img>"));
+
+
+    //para hacerla dragable
+    $('.rotableDragable').draggable(); //esto si funciona
+
+    //para hacer que rote.
+    $(document).keypress(function(e) {
+       console.log("activado ui-widget-content keypress");
+       conta++;
+
+        if(e.which == 32) {
+           console.log("preskey space");
+           console.log(conta);
+           //$('#rotating-dragable').toggleClass('rotated');
+        }
+
+        if (conta===1){
+           console.log("keypressed: ", e.which, conta);
+           $('.rotableDragable').addClass('rotated1');
+       }
+
+       if (conta===2){
+           console.log("keypressed: ", e.which, conta);
+           $('.rotableDragable').removeClass('rotated1');
+           $('.rotableDragable').addClass('rotated2');
+       }
+
+       if (conta===3){
+           console.log("keypressed: ", e.which, conta);
+           $('.rotableDragable').removeClass('rotated2');
+           $('.rotableDragable').addClass('rotated3');
+       }
+
+       if (conta===4){
+           console.log("keypressed: ", e.which, conta);
+           $('.rotableDragable').removeClass('rotated3');
+           $('.rotableDragable').addClass('rotated4');
+       }
+
+       if (conta===5) {
+           console.log("keypressed: ", e.which, conta);
+           $('.rotableDragable').removeClass('rotated4');
+           $('.rotableDragable').addClass('rotated1');
+           conta=1;
+       }
+
+       $('.rotableDragable').toggleClass('rotated1');
+       console.log(this.id);
+   }); //funcion para rotar, funciona mal pero funciona
+
+
+    $('.dominonumberplaced[dominonumber=1]').append("<img>");
+    $('.dominonumberplaced[dominonumber=1]')[0].innerHTML=domSelected.numberOne;
+    console.log(this); //aqui ahora this es la board
+    /*switch (domSelected.numberOne) {
+
+      case 0:
+        $('.dominonumberclass[dominonumber=1]').children("img").attr('src',"./img/CERO.png");
+        break;
+      case 1:
+        $('.dominonumberclass[dominonumber=1]').children("img").attr('src',"./img/UNO.png");
+        break;
+      case 2:
+        $('.dominonumberclass[dominonumber=1]').children("img").attr('src',"./img/DOS.png");
+        break;
+      case 3:
+        $('.dominonumberclass[dominonumber=1]').children("img").attr('src',"./img/TRES.png");
+        break;
+      case 4:
+        $('.dominonumberclass[dominonumber=1]').children("img").attr('src',"./img/CUATRO.png");
+        break;
+      case 5:
+        $('.dominonumberclass[dominonumber=1]').children("img").attr('src',"./img/CINCO.png");
+        break;
+      case 6:
+        $('.dominonumberclass[dominonumber=1]').children("img").attr('src',"./img/SEIS.png");
+        break;
+      default:
+
+    }*/
+
+    $('.dominonumberplaced[dominonumber=2]').append("<img>");
+
+    $('.dominonumberplaced[dominonumber=2]')[0].innerHTML=domSelected.numberTwo;
+    console.log(this); //aqui ahora this is the boardtable
+    /*switch (domSelected.numberTwo) {
+      case 0:
+        $('.dominonumberclass[dominonumber=2]').children("img").attr('src',"./img/CERO.png");
+        break;
+      case 1:
+        $('.dominonumberclass[dominonumber=2]').children("img").attr('src',"./img/UNO.png");
+        break;
+      case 2:
+        $('.dominonumberclass[dominonumber=2]').children("img").attr('src',"./img/DOS.png");
+        break;
+      case 3:
+        $('.dominonumberclass[dominonumber=2]').children("img").attr('src',"./img/TRES.png");
+        break;
+      case 4:
+        $('.dominonumberclass[dominonumber=2]').children("img").attr('src',"./img/CUATRO.png");
+        break;
+      case 5:
+        $('.dominonumberclass[dominonumber=2]').children("img").attr('src',"./img/CINCO.png");
+        break;
+      case 6:
+        $('.dominonumberclass[dominonumber=2]').children("img").attr('src',"./img/SEIS.png");
+        break;
+      default:
+
+    }*/
+});
+
+};
+
 DominoGame.prototype.placeDominoInBoard=function(domSelected,name){
 
   var dataRow;
@@ -217,7 +368,8 @@ DominoGame.prototype.placeDominoInBoard=function(domSelected,name){
   var end=dominoGame.gameBoard.domino.length-1; //index of last domino placed in board
 
     $('.boardtable').on('click','.cell-board',function(){
-
+      console.log("dom selected es:",domSelected);
+      //$(domSelected).draggable();//esto no vale no se como funcionara
       console.log(dominoGame.gameBoard.domino[0]);
       if (dominoGame.gameBoard.domino[0]===undefined) {
           dominoGame.gameBoard.insertPushDomino(domSelected); //para el primer movimento

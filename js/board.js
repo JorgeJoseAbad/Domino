@@ -132,6 +132,12 @@ Board.prototype.movToEnd=function(selectedDomino){
       }
     };
 
+
+//prueba para ejecutar desde consola
+Board.prototype.impresionPrueba=function(mensaje){
+  console.log(mensaje);
+};
+
 //funcions for test
     Board.prototype.insertPushDomino=function(domino){
 
@@ -150,7 +156,7 @@ Board.prototype.movToEnd=function(selectedDomino){
       var snake;
       snake=this.domino.unshift(domino);
 
-      
+
     };
 
   var gameBoard = new Board({

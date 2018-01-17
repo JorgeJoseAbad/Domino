@@ -101,8 +101,8 @@ Player.prototype.drawNumbersInHand=function(node,number){
               playerOne.drawNumbersInHand($('.dominoplayerone.filled[picknumber="'+i+'"]')[0].childNodes[0],this.body[i].numberOne);
               $('.dominoplayerone[picknumber="'+i+'"]')[0].childNodes[1].innerHTML= this.body[i].numberTwo;
               playerOne.drawNumbersInHand($('.dominoplayerone.filled[picknumber="'+i+'"]')[0].childNodes[1],this.body[i].numberTwo);
-              $('.dominoplayerone.filled[picknumber="'+i+'"]').draggable();//new, dominoplayerone filled is dragable
-              
+              //$('.dominoplayerone.filled[picknumber="'+i+'"]').draggable();//new, dominoplayerone filled is dragable
+
             }
 
         }
@@ -131,7 +131,7 @@ Player.prototype.drawNumbersInHand=function(node,number){
               playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[0],this.body[j].numberOne);
               $('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1].innerHTML= this.body[j].numberTwo;
               playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1],this.body[j].numberTwo);
-              $('.dominoplayertwo.filled[picknumber="'+j+'"]').draggable();//new, dominoplayertwo filled is dragable
+              //$('.dominoplayertwo.filled[picknumber="'+j+'"]').draggable();//new, dominoplayertwo filled is dragable
             }
 
         }
