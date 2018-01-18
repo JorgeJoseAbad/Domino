@@ -210,3 +210,12 @@ body{
   width: 20px;
   background-color: white;
 }
+
+.dominonumberplaced img{
+  position:absolute;
+  margin-left: -10px;
+  margin-top: 0px;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+}

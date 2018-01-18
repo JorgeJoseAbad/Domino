@@ -8,6 +8,18 @@
 
     }
 
+//New function newGraphicOk to check graphically correct movement
+//with consideration of position and orientation of domino
+Board.prototype.newGraphicOk=function(conta,boardPlace,newDom,snakeDom){
+  console.log("ESTAMOS EN newGraphicOk");
+  console.log("conta: ",conta); //orientacion del domino puesto
+  console.log("boardPlace: ",boardPlace); //posicion del domino puesto
+  console.log("newDom: ",newDom);//domino puesto
+  console.log("snakeDom: ",snakeDom);//array de dominoes ya puestos
+
+};
+/*newwwww*/
+
 
 //Function to check graphically correct movement
 Board.prototype.graphicOk=function(boardPlace,newDom,snakeDom){
