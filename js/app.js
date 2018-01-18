@@ -302,6 +302,8 @@ $('.boardtable').on('mousedown','.cell-board',function(){
       .addClass('rotableDragable')
       .attr('data-row', dataRow) //takes as atributos the datrow y datacol donde hago click
       .attr('data-col', dataCol)
+      .css('marginLeft',dataCol*20+'px')//experimental
+      .css('marginTop',dataRow*20+'px')//experimentl
     );
 
    $('.boardtable .rotableDragable').append($('<div>')
