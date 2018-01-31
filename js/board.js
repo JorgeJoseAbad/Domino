@@ -4,7 +4,7 @@
       this.rows           = options.rows;
       this.columns        = options.columns;
       this.domino         = options.dominoPlayed;
-
+      this.cellPosition   = options.cellPosition; //new, ojo
 
     }
 
@@ -142,6 +142,11 @@ Board.prototype.movToEnd=function(selectedDomino){
           );
         }
       }
+      //to retrieve x,y position of first cell of board,
+      var  cell=$(".cell-board:first");
+      gameBoard.cellPosition=cell.offset();
+      console.log("CELL: ",cell);
+      console.log("CELLPOSITION: ",gameBoard.cellPosition);
     };
 
 
@@ -167,12 +172,11 @@ Board.prototype.impresionPrueba=function(mensaje){
     Board.prototype.insertUnshiftDomino=function(domino){
       var snake;
       snake=this.domino.unshift(domino);
-
-
     };
 
   var gameBoard = new Board({
     rows: 20,
     columns: 30,
-    dominoPlayed: []
+    dominoPlayed: [],
+    cellPosition: {} //nuevo, ojo
   });

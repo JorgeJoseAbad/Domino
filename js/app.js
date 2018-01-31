@@ -217,12 +217,20 @@ DominoGame.prototype.drawNumbersInBoard=function(position,number){
 
 DominoGame.prototype.rotableDomino=function(rotable){
       var conta=0;
+
       console.log("in funcion rotableDomino, rotable is:",rotable);
       $('.boardtable').off(); //para eliminar el evento on actual
                               //(que pone la ficha seleccionada) sobre la tabla
       //to make it rotating.
       $(document).keypress(function(e) {
         $('.boardtable').off();  //para evitar repeticiones del evento "on" del final de la funcion;
+      //To reset margin of domino and be able to move in all the table after first placement of domino.
+      $('.rotableDragable').css(
+        'marginLeft',0+'px'//experimental
+      );
+      $('.rotableDragable').css(
+        'marginTop',0+'px'
+      );
 
          console.log("activated ui-widget-content keypress y conta es:",conta);
          conta++;
@@ -264,18 +272,47 @@ DominoGame.prototype.rotableDomino=function(rotable){
          }
          //dentro de la funcion que permite rotar, detectamos el levantamiento del mouse
          //para indicar posición elegida por el jugador
-        $('.boardtable').on('mouseup','.dominonumberplaced',function(){
+        $('.boardtable').on('mouseup','.rotableDragable',function(){
           console.log("prueba levantar muse, y conta es:",conta);
 
-          console.log("this:-----",this);//this is here the dominonumber class
+          var globalOffset=dominoGame.gameBoard.cellPosition;
+          console.log("Global OFFSET: ",globalOffset);
+          console.log(this.style.left,globalOffset.left);
+          console.log(this.style.top,globalOffset.top);
+
+          console.log("this:-----",this);//this is here the rotableDragable class, is the var rotable
+          var leftOffset=parseInt(this.style.left)-globalOffset.left; //offset in px from left reference
+          console.log("ofset-IZQUIERDO: ",leftOffset);
+          console.log("ROW: ",Math.round(leftOffset/20));
+          var topOffset=parseInt(this.style.top)-globalOffset.top; //offset in px from top reference
+          console.log("ofset-SUPERIOR: ",topOffset);
+          console.log("COLUMN: ",Math.round(topOffset/20));
+
+
+
           console.log("dominoGame.gameBoard.domino[0] es:",dominoGame.gameBoard.domino[0]);
-          placedRow=parseInt($(this).attr('style.left'));
-          placedCol=parseInt($(this).attr('style.top'));
-          console.log("par posicion: ",placedRow,placedCol);
+
+          if (conta===1){
+            placedRow=Math.trunc(parseInt(this.style.top)/20)-3; //ok row aproximate.
+            placedCol=Math.trunc(parseInt(this.style.left)/20)-4;
+          }
+          if (conta===2){
+            placedRow=Math.trunc(parseInt(this.style.top)/20)-3; //ok row aproximate.
+            placedCol=Math.trunc(parseInt(this.style.left)/20)-5; //ok col aproximate, -4 is "calibration"
+          }
+          if (conta===3){
+            placedRow=Math.trunc(parseInt(this.style.top)/20)-3; //ok row aproximate.
+            placedCol=Math.trunc(parseInt(this.style.left)/20)-5;
+          }
+          if (conta===4){
+            placedRow=Math.trunc(parseInt(this.style.top)/20)-4; //ok row aproximate.
+            placedCol=Math.trunc(parseInt(this.style.left)/20)-5; //ok col aproximate, -4 is "calibration"
+          }
+          console.log("par posicion, placedRow, placedCol, conta: ",placedRow,placedCol, conta);
           if (dominoGame.gameBoard.domino[0]===undefined){
             console.log("primera ficha, ojo");
           }
-          dominoGame.gameBoard.newGraphicOk(conta,this,rotable,dominoGame.gameBoard.domino[0]);
+          else dominoGame.gameBoard.newGraphicOk(conta,this,rotable,dominoGame.gameBoard.domino[0]);
         });
          //$('.rotableDragable').toggleClass('rotated1');
 
@@ -302,24 +339,34 @@ $('.boardtable').on('mousedown','.cell-board',function(){
       .addClass('rotableDragable')
       .attr('data-row', dataRow) //takes as atributos the datrow y datacol donde hago click
       .attr('data-col', dataCol)
-      .css('marginLeft',dataCol*20+'px')//experimental
-      .css('marginTop',dataRow*20+'px')//experimentl
+      .css('marginLeft',dataCol*20+'px')//experimental to place the domines
+      .css('marginTop',dataRow*20+'px')//where made click
     );
 
    $('.boardtable .rotableDragable').append($('<div>')
      .addClass('dominonumberplaced')
      .attr('dominonumber',1)
+     .attr('row',dataRow)
+     .attr('col',dataCol)
+
    );
 
    $('.boardtable .rotableDragable').append($('<div>')
      .addClass('dominonumberplaced')
      .attr('dominonumber',2)
+     .attr('row',dataRow+1)
+     .attr('col',dataCol)
+
    );
 
     //to make it dragable
-    $('.rotableDragable').draggable();
+    $('.rotableDragable').draggable({
+      containment: ".boardtable",
+      scroll: false,
+    }
+  );
 
-
+//this work
     $('.dominonumberplaced[dominonumber=1]')[0].innerHTML=domSelected.numberOne;
     console.log("primero",domSelected.numberOne);
     $('.dominonumberplaced[dominonumber=1]').append("<img>");
@@ -349,7 +396,7 @@ $('.boardtable').on('mousedown','.cell-board',function(){
     }
 
 
-
+//this work
     $('.dominonumberplaced[dominonumber=2]')[0].innerHTML=domSelected.numberTwo;
     console.log("segundo",domSelected.numberTwo); //aqui ahora this is the boardtable
     $('.dominonumberplaced[dominonumber=2]').append("<img>");
@@ -379,13 +426,11 @@ $('.boardtable').on('mousedown','.cell-board',function(){
     }
 
    var rotable=document.getElementsByClassName('rotableDragable')[0];
+
    console.log("rotable es",rotable);
 
    dominoGame.rotableDomino(rotable);
      //aqui ahora this es la board
-
-
-
 });
 
 };
