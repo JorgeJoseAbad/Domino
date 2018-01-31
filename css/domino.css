@@ -22,12 +22,24 @@ body{
   font-weight: bold;
 }
 
+#principal{
+  width: 840px;
+}
+
 .boardtable {
   height: 400px;
   margin: 20px auto;
   width: 600px;
   background-color: red;
+}
 
+#player-area{
+  position:absolute;
+  margin-top: -420px;
+  margin-left: 720px;
+  height: 400px;
+  width: 240px;
+  border: 1px solid blue;
 }
 
 .cell-board{

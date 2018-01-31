@@ -1,10 +1,10 @@
 
     function Board(options) {
 
-      this.rows           = options.rows;
-      this.columns        = options.columns;
-      this.domino         = options.dominoPlayed;
-      this.cellPosition   = options.cellPosition; //new, ojo
+      this.rows               = options.rows;
+      this.columns            = options.columns;
+      this.domino             = options.dominoPlayed;
+      this.firstCellPosition  = options.firstCellPosition; //new, ojo
 
     }
 
@@ -143,10 +143,10 @@ Board.prototype.movToEnd=function(selectedDomino){
         }
       }
       //to retrieve x,y position of first cell of board,
-      var  cell=$(".cell-board:first");
-      gameBoard.cellPosition=cell.offset();
-      console.log("CELL: ",cell);
-      console.log("CELLPOSITION: ",gameBoard.cellPosition);
+      var  firstCell=$(".cell-board:first");
+      gameBoard.firstCellPosition=firstCell.offset();
+      console.log("CELL: ",firstCell);
+      console.log("CELLPOSITION: ",gameBoard.firstCellPosition);
     };
 
 
@@ -178,5 +178,5 @@ Board.prototype.impresionPrueba=function(mensaje){
     rows: 20,
     columns: 30,
     dominoPlayed: [],
-    cellPosition: {} //nuevo, ojo
+    firstCellPosition: {} //nuevo, ojo
   });

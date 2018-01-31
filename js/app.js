@@ -275,7 +275,7 @@ DominoGame.prototype.rotableDomino=function(rotable){
         $('.boardtable').on('mouseup','.rotableDragable',function(){
           console.log("prueba levantar muse, y conta es:",conta);
 
-          var globalOffset=dominoGame.gameBoard.cellPosition;
+          var globalOffset=dominoGame.gameBoard.firstCellPosition;
           console.log("Global OFFSET: ",globalOffset);
           console.log(this.style.left,globalOffset.left);
           console.log(this.style.top,globalOffset.top);
@@ -283,30 +283,30 @@ DominoGame.prototype.rotableDomino=function(rotable){
           console.log("this:-----",this);//this is here the rotableDragable class, is the var rotable
           var leftOffset=parseInt(this.style.left)-globalOffset.left; //offset in px from left reference
           console.log("ofset-IZQUIERDO: ",leftOffset);
-          console.log("ROW: ",Math.round(leftOffset/20));
+          console.log("COLUMN: ",Math.round(leftOffset/20));
           var topOffset=parseInt(this.style.top)-globalOffset.top; //offset in px from top reference
           console.log("ofset-SUPERIOR: ",topOffset);
-          console.log("COLUMN: ",Math.round(topOffset/20));
+          console.log("ROW: ",Math.round(topOffset/20));
 
 
 
           console.log("dominoGame.gameBoard.domino[0] es:",dominoGame.gameBoard.domino[0]);
 
           if (conta===1){
-            placedRow=Math.trunc(parseInt(this.style.top)/20)-3; //ok row aproximate.
-            placedCol=Math.trunc(parseInt(this.style.left)/20)-4;
+            placedRow=Math.round(topOffset/20); //ok row aproximate.
+            placedCol=Math.round(leftOffset/20);
           }
           if (conta===2){
-            placedRow=Math.trunc(parseInt(this.style.top)/20)-3; //ok row aproximate.
-            placedCol=Math.trunc(parseInt(this.style.left)/20)-5; //ok col aproximate, -4 is "calibration"
+            placedRow=Math.round(topOffset/20); //ok row aproximate.
+            placedCol=Math.round(leftOffset/20); //ok col aproximate, -4 is "calibration"
           }
           if (conta===3){
-            placedRow=Math.trunc(parseInt(this.style.top)/20)-3; //ok row aproximate.
-            placedCol=Math.trunc(parseInt(this.style.left)/20)-5;
+            placedRow=Math.round(topOffset/20); //ok row aproximate.
+            placedCol=Math.round(leftOffset/20);
           }
           if (conta===4){
-            placedRow=Math.trunc(parseInt(this.style.top)/20)-4; //ok row aproximate.
-            placedCol=Math.trunc(parseInt(this.style.left)/20)-5; //ok col aproximate, -4 is "calibration"
+            placedRow=Math.round(topOffset/20); //ok row aproximate.
+            placedCol=Math.round(leftOffset/20); //ok col aproximate, -4 is "calibration"
           }
           console.log("par posicion, placedRow, placedCol, conta: ",placedRow,placedCol, conta);
           if (dominoGame.gameBoard.domino[0]===undefined){
