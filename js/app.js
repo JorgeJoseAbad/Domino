@@ -215,10 +215,11 @@ DominoGame.prototype.drawNumbersInBoard=function(position,number){
 
 };
 
-DominoGame.prototype.rotableDomino=function(rotable){
+DominoGame.prototype.rotableDomino=function(rotable,domSelected){
       var conta=0;
 
-      console.log("in funcion rotableDomino, rotable is:",rotable);
+      console.log("in function rotableDomino, rotable is: ",rotable);
+      console.log("in function rotableDomino, domSelected is: ",domSelected);
       $('.boardtable').off(); //para eliminar el evento on actual
                               //(que pone la ficha seleccionada) sobre la tabla
       //to make it rotating.
@@ -273,7 +274,7 @@ DominoGame.prototype.rotableDomino=function(rotable){
          //dentro de la funcion que permite rotar, detectamos el levantamiento del mouse
          //para indicar posición elegida por el jugador
         $('.boardtable').on('mouseup','.rotableDragable',function(){
-          console.log("prueba levantar muse, y conta es:",conta);
+          console.log("prueba levantar dedo del padtrack, y conta es:",conta);
 
           var globalOffset=dominoGame.gameBoard.firstCellPosition;
           console.log("Global OFFSET: ",globalOffset);
@@ -308,11 +309,14 @@ DominoGame.prototype.rotableDomino=function(rotable){
             placedRow=Math.round(topOffset/20); //ok row aproximate.
             placedCol=Math.round(leftOffset/20); //ok col aproximate, -4 is "calibration"
           }
-          console.log("par posicion, placedRow, placedCol, conta: ",placedRow,placedCol, conta);
-          if (dominoGame.gameBoard.domino[0]===undefined){
+          console.log("par posicion y aspecto: placedRow, placedCol, conta: ",placedRow,placedCol, conta);
+
+          dominoGame.placeDominoInBoard(domSelected,this,placedRow,placedCol,conta);
+          /*if (dominoGame.gameBoard.domino[0]===undefined){
             console.log("primera ficha, ojo");
           }
           else dominoGame.gameBoard.newGraphicOk(conta,this,rotable,dominoGame.gameBoard.domino[0]);
+*/
         });
          //$('.rotableDragable').toggleClass('rotated1');
 
@@ -359,14 +363,14 @@ $('.boardtable').on('mousedown','.cell-board',function(){
 
    );
 
-    //to make it dragable
+    //to make placed domino dragable inside board
     $('.rotableDragable').draggable({
       containment: ".boardtable",
       scroll: false,
     }
   );
 
-//this work
+//this work to construct the domino we are placing
     $('.dominonumberplaced[dominonumber=1]')[0].innerHTML=domSelected.numberOne;
     console.log("primero",domSelected.numberOne);
     $('.dominonumberplaced[dominonumber=1]').append("<img>");
@@ -429,13 +433,26 @@ $('.boardtable').on('mousedown','.cell-board',function(){
 
    console.log("rotable es",rotable);
 
-   dominoGame.rotableDomino(rotable);
+   dominoGame.rotableDomino(rotable,domSelected);
      //aqui ahora this es la board
 });
 
 };
 
 
+/*New version, with rotable, col y row positions and aspect*/
+
+DominoGame.prototype.placeDominoInBoard=function(domSelected,rotable,rowPosition, colPosition, aspect){
+ console.log("INSIDE new placeDominoInBoard function");
+ console.log(rotable,rowPosition,colPosition,aspect);
+ console.log(dominoGame.gameBoard.domino[0]);
+ if (dominoGame.gameBoard.domino[0]===undefined) {
+     dominoGame.gameBoard.insertPushDomino(domSelected);
+   }
+};
+
+/*Old version with posicion by click, no dragable nor rotable*/
+/*
 DominoGame.prototype.placeDominoInBoard=function(domSelected,name){
 
   var dataRow;
@@ -444,7 +461,6 @@ DominoGame.prototype.placeDominoInBoard=function(domSelected,name){
 
     $('.boardtable').on('click','.cell-board',function(){
       console.log("dom selected es:",domSelected);
-      //$(domSelected).draggable();//esto no vale no se como funcionara
       console.log(dominoGame.gameBoard.domino[0]);
       if (dominoGame.gameBoard.domino[0]===undefined) {
           dominoGame.gameBoard.insertPushDomino(domSelected); //para el primer movimento
@@ -498,7 +514,7 @@ DominoGame.prototype.placeDominoInBoard=function(domSelected,name){
             }); // end onclic event
 
     }; //end function placeDominoInBoard
-
+*/
 
     var dominoGame = new DominoGame({
       playerOne:playerOne,
