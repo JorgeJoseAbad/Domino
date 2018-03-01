@@ -10,21 +10,98 @@
 
 //New function newGraphicOk to check graphically correct movement
 //with consideration of position and orientation of domino
-Board.prototype.newGraphicOk=function(conta,boardPlace,newDom,snakeDom){
-  console.log("ESTAMOS EN newGraphicOk");
-  console.log("conta: ",conta); //orientacion del domino puesto
-  console.log("boardPlace: ",boardPlace); //posicion del domino puesto
-  console.log("newDom: ",newDom);//domino puesto
-  console.log("snakeDom: ",snakeDom);//array de dominoes ya puestos
+Board.prototype.drawDomino=function(rotable,domSelected,rowOne,colOne,rowTwo,colTwo){
+  console.log("ESTAMOS EN drawDomino function");
+  console.log("Rotable: ", rotable);
+  console.log("domSelected ",domSelected); //orientacion del domino puesto
+  console.log("rowOne ",rowOne); //posicion del domino puesto
+  console.log("colOne ",colOne);//domino puesto
+  console.log("rowTwo ",rowTwo);//array de dominoes ya puestos
+  console.log("colTwo ",colTwo);
+
+  $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]")[0].innerHTML=+domSelected.numberOne;
+  $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").addClass("occupied").append("<img>");
+  switch (domSelected.numberOne) {
+    case 0:
+      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").children("img").attr('src',"./img/CERO.png");
+      break;
+    case 1:
+      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").children("img").attr('src',"./img/UNO.png");
+      break;
+    case 2:
+      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").children("img").attr('src',"./img/DOS.png");
+      break;
+    case 3:
+      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").children("img").attr('src',"./img/TRES.png");
+      break;
+    case 4:
+      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").children("img").attr('src',"./img/CUATRO.png");
+      break;
+    case 5:
+      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").children("img").attr('src',"./img/CINCO.png");
+      break;
+    case 6:
+      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").children("img").attr('src',"./img/SEIS.png");
+      break;
+    default:
+  }
+
+  $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]")[0].innerHTML=+domSelected.numberTwo;
+  $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").addClass('occupied').append("<img>");
+  switch (domSelected.numberTwo) {
+    case 0:
+      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").children("img").attr('src',"./img/CERO.png");
+      break;
+    case 1:
+      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").children("img").attr('src',"./img/UNO.png");
+      break;
+    case 2:
+      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").children("img").attr('src',"./img/DOS.png");
+      break;
+    case 3:
+      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").children("img").attr('src',"./img/TRES.png");
+      break;
+    case 4:
+      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").children("img").attr('src',"./img/CUATRO.png");
+      break;
+    case 5:
+      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").children("img").attr('src',"./img/CINCO.png");
+      break;
+    case 6:
+      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").children("img").attr('src',"./img/SEIS.png");
+      break;
+    default:
+  }
+
+  $(".rotableDragable").remove(); //para indicar que est
+
 
 };
 /*newwwww*/
 
 
 //Function to check graphically correct movement
-Board.prototype.graphicOk=function(boardPlace,newDom,snakeDom){
+Board.prototype.graphicOk=function(rotable,snakeDom){
+  var nUno,nDos;
+  console.log("Estamos en graphicOK");
+  console.log(rotable);
+  nUno=rotable.getElementsByClassName('dominonumberplaced')[0].val;
+  nDos=rotable.getElementsByClassName('dominonumberplaced')[1].val;
+  console.log(nUno,nDos);
+  console.log($('.rotableDragable'));
+  console.log(snakeDom);
+
+  //verify mov posible to begin of snake
+  /*if((newDom.numberOne===snakeDom.numberOne)&&
+      ||
 
 
+  ){
+
+  };*/
+
+
+/*
   thisdataRow=parseInt($(boardPlace).attr('data-row'));
   thisdataCol=parseInt($(boardPlace).attr('data-col'));
   console.log($('div[data-row="'+(thisdataRow)+'"][data-col="'+thisdataCol+'"]').html());
@@ -49,7 +126,7 @@ Board.prototype.graphicOk=function(boardPlace,newDom,snakeDom){
    } else {
 
      return false;
-   }
+   }*/
 };
 
 
@@ -176,7 +253,7 @@ Board.prototype.impresionPrueba=function(mensaje){
 
   var gameBoard = new Board({
     rows: 20,
-    columns: 30,
+    columns: 20,
     dominoPlayed: [],
     firstCellPosition: {} //nuevo, ojo
   });
