@@ -191,7 +191,8 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
 
       var angleMode=0;
       var angle = 0;
-      var colNone, colTwo, rowOne, rowTwo;
+      var definedPos=false;
+      var colOne, colTwo, rowOne, rowTwo;
       var aspect=0;
 
       $('.boardtable').off(); //esta bien, para eliminar el evento on actual
@@ -238,22 +239,38 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
         }
         console.log("angle, grados: ",angle);
         console.log("aspect, orientacion: ", aspect);
+      }); //end $(document).keypress(function(e)
 
+      $('.boardtable').on('mouseup','.rotableDragable',function(){
+
+        definedPos=true;
+        console.log(aspect);
+        if (angleMode===1) dominoGame.generateCoordsOfPlacedDomino(this,domSelected,aspect);
+        //debugger;
+      });
+
+
+
+  console.log("PARA VER SI ESTO SE HACE");
+}; // end function rotateDomino
          //dentro de la funcion que permite rotar, detectamos el levantamiento del mouse
          //para indicar posición elegida por el jugador
-        $('.boardtable').on('mouseup','.rotableDragable',function(){
-          event.preventDefault();
+DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSelected,aspect){
+
           //debugger;
-          console.log("En evento mouseup");
-          console.log("this:-----",this);//this is here the rotableDragable class, is the var rotable
-          console.log("this.style: ",this.style);
+
+          console.log("In function generateCoordsOfPlacedDomino");
+          console.log("rotableDragable inicial: ",rotableDragable);//this is here the rotableDragable class, is the var rotable
+          console.log("rotableDragable.style inicial: ",rotableDragable.style);
+          console.log(aspect);
+
           var globalOffset=dominoGame.gameBoard.firstCellPosition;
 
-          var leftOffset=parseInt(this.style.left)-globalOffset.left; //offset in px from left reference
+          var leftOffset=parseInt(rotableDragable.style.left)-globalOffset.left; //offset in px from left reference
 
           var nColumn=Math.round(leftOffset/20);
 
-          var topOffset=parseInt(this.style.top)-globalOffset.top; //offset in px from top reference
+          var topOffset=parseInt(rotableDragable.style.top)-globalOffset.top; //offset in px from top reference
 
           var nRow=Math.round(topOffset/20);
 
@@ -289,13 +306,14 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
           console.log("par posicion y aspecto: colOne: ",colOne," colTwo: ",colTwo," rowOne: ", rowOne," rowTwo: ", rowTwo," aspect: ",aspect);
 
 
-          dominoGame.placeDominoInBoard(name,domSelected,this,rowOne,colOne,rowTwo,colTwo,aspect);
+          dominoGame.placeDominoInBoard(name,domSelected,rotableDragable,rowOne,colOne,rowTwo,colTwo,aspect);
 
-        }); // end of $('.boardtable').on('mouseup','.rotableDragable',function()
 
-    }); //end $(document).keypress(function(e)
+}; // end of function generateCoordsOfPlacedDomino
 
-}; // end function rotateDomino
+
+
+
 
 
 /*nueva funcion dragRotableDomino que en vez de detectar el click para ver si
