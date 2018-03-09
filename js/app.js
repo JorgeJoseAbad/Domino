@@ -71,7 +71,7 @@ DominoGame.prototype.startGame=function(){
       document.getElementById("gamestate").innerHTML='Game is running, pick a domino and place it whith the mouse in the grey board, mouse points to number 1 (the upper) of domino. if the move is incorrect, the domino token returns to the player';
       dominoGame.playerOne.startPlayer(dominoGame.dominoBox);
       dominoGame.playerTwo.startPlayer(dominoGame.dominoBox);
-      console.log(dominoGame.playerOne);
+
       if (dominoGame.playerOne.searchDomino(6,6)){
         dominoGame.playerOne.turn=true;
         dominoGame.playerOne.showPlayerDominoes();
@@ -101,32 +101,27 @@ DominoGame.prototype.selecDominoPlayerOne=function(){
       var numberSelectedDomino;
       numberSelectedDomino=$(this).attr('picknumber');
 
-      /*new solo vale ahora como indicacion de que he herealizado clik en tal elemento*/
-      $('.dominoplayerone.filled[picknumber="'+numberSelectedDomino+'"]').mouseup(
-             console.log("he soltado el dragable",numberSelectedDomino)
-          );
-
-
       selectedDomino=dominoGame.playerOne.body.splice(numberSelectedDomino,1)[0];
-      console.log("selectedDomino del player 1 es",selectedDomino);
+
       dominoGame.playerOne.removePlayerDominoes();
       dominoGame.playerOne.showPlayerDominoes();
       dominoGame.dragRotableDomino(selectedDomino,dominoGame.playerOne.name);
-//ojo aqui la prueba cambiando la funcion de destino del domino seleccionado
-    });
+    //ojo aqui la prueba cambiando la funcion de destino del domino seleccionado
+    });//end on click event
 
-};
+}; //end function
 
 // If playerOne move on board is valid...
 DominoGame.prototype.movDominoPlayerOneValid=function(){
         console.log("estamos en movDominoPlayerOneValid");
 
-        $('.boardtable').off("click",'.cell-board');
+        $('.boardtable').off("click",'.cell-board'); //revisar esto
         dominoGame.playerOne.changeTurn();
         dominoGame.playerOne.hideDominoes();
         dominoGame.playerTwo.showDominoes();
         dominoGame.playerTwo.removePlayerDominoes();
         dominoGame.playerTwo.showPlayerDominoes();
+
         dominoGame.selecDominoPlayerTwo();
 };
 
@@ -140,7 +135,7 @@ DominoGame.prototype.repeatPlayerOneMov=function(){
 
 // Game select playerTwo's domino
 DominoGame.prototype.selecDominoPlayerTwo=function(){
-  console.log("estamos en selecDominoPlayerTwo");
+
 
 
     $('#dominoesplayertwo').on('click', ".dominoplayertwo.filled", function() {
@@ -149,7 +144,7 @@ DominoGame.prototype.selecDominoPlayerTwo=function(){
       numberSelectedDomino=$(this).attr('picknumber');
 
       selectedDomino=dominoGame.playerTwo.body.splice(numberSelectedDomino,1)[0];
-      console.log("selected domino del player2 es:",selectedDomino);
+
       dominoGame.playerTwo.removePlayerDominoes();
       dominoGame.playerTwo.showPlayerDominoes();
       dominoGame.dragRotableDomino(selectedDomino,dominoGame.playerTwo.name);
@@ -168,6 +163,7 @@ DominoGame.prototype.selecDominoPlayerTwo=function(){
     dominoGame.playerOne.showDominoes();
     dominoGame.playerOne.removePlayerDominoes();
     dominoGame.playerOne.showPlayerDominoes();
+
     dominoGame.selecDominoPlayerOne();
   };
 
@@ -178,6 +174,8 @@ DominoGame.prototype.selecDominoPlayerTwo=function(){
     dominoGame.selecDominoPlayerTwo();
   };
 
+
+//funcion actualmente no operativa
 DominoGame.prototype.drawNumbersInBoard=function(rowPosition,colPosition,aspect,domSelected){
   console.log("IN newDrawNumbersInBoard, row, col, aspect, number: ",rowPosition,colPosition,aspect,domSelected);
   if (aspect===2) {console.log("aspect 2: ",rowPosition,colPosition,domSelected.numberTwo);}
@@ -187,62 +185,26 @@ DominoGame.prototype.drawNumbersInBoard=function(rowPosition,colPosition,aspect,
 };
 
 
-//Draw dominoes in board, old version
-/*DominoGame.prototype.drawNumbersInBoard=function(position,number){
-  $(position).addClass('filled');
-  $(position).html(number);
-  $(position).append("<img>");
-  switch (number) {
-    case 0:
-      $(position).children("img").attr('src',"./img/CERO.png");
-      break;
-    case 1:
-      $(position).children("img").attr('src',"./img/UNO.png");
-      break;
-    case 2:
-      $(position).children("img").attr('src',"./img/DOS.png");
-      break;
-    case 3:
-      $(position).children("img").attr('src',"./img/TRES.png");
-      break;
-    case 4:
-      $(position).children("img").attr('src',"./img/CUATRO.png");
-      break;
-    case 5:
-      $(position).children("img").attr('src',"./img/CINCO.png");
-      break;
-    case 6:
-      $(position).children("img").attr('src',"./img/SEIS.png");
-      break;
-    default:
 
-  }
-
-};*/
 
 DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
-      var conta=0;
-      var cur = 0;
-      var deggres=90;
-      var colNone, colTwo, rowOne, rowTwo;
 
-      var aspect;
-      console.log("in function rotateDomino, rotable is: ",rotable);
-      console.log("in function rotateDomino, domSelected is: ",domSelected);
-      $('.boardtable').off(); //para eliminar el evento on actual
+      var angleMode=0;
+      var angle = 0;
+      var colNone, colTwo, rowOne, rowTwo;
+      var aspect=0;
+
+      $('.boardtable').off(); //esta bien, para eliminar el evento on actual
                               //(que pone la ficha seleccionada) sobre la tabla
 
          //to make placed domino dragable inside board
       $('.rotableDragable').draggable({
-           //containment: ".boardtable",
            grid: [ 10, 10 ],
-           //scroll: false,
          }
        );
 
     $(document).keypress(function(e) {
-      console.log(e.which);
-      //$('.rotableDragable').off();  //para evitar repeticiones del evento "on" del final de la funcion;
+      //debugger;
       //To reset margin of domino and be able to move in all the table after first placement of domino.
       $('.rotableDragable').css(
         'marginLeft',0+'px'//experimental
@@ -250,104 +212,97 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
       $('.rotableDragable').css(
         'marginTop',0+'px'
       );
+      //debugger;
+      var mode=(angleMode===0) ? angle=0 : angle=(angle+90);
+        angleMode=1;
 
-      var pos = (conta===0) ? cur=0 :
-        cur=(cur+deggres);
-        conta=1;
+      console.log("Pulsada tecla",e.which,"angle: ",angle);
 
-        $(".rotableDragable").css("-webkit-transform", "rotate(" + cur + "deg)");
-        switch (cur) {
-          case 0: aspect=4;
+      $(".rotableDragable").css("-webkit-transform", "rotate(" + angle + "deg)");
+
+      switch (angle) {
+          case 0:   aspect=4;
             break;
-          case 90: aspect=1;
+          case 90:  aspect=1;
             break;
           case 180: aspect=2;
             break;
           case 270: aspect=3;
             break;
           case 360: {aspect=4;
-                    cur=0;
+                    angle=0;
                   }
             break;
         default:
 
         }
-        console.log("cur, o sea grados, o sea aspecto: ",cur);
+        console.log("angle, grados: ",angle);
         console.log("aspect, orientacion: ", aspect);
 
          //dentro de la funcion que permite rotar, detectamos el levantamiento del mouse
          //para indicar posición elegida por el jugador
         $('.boardtable').on('mouseup','.rotableDragable',function(){
-          //event.preventDefault();
-          console.log("prueba levantar dedo del padtrack, y conta es:",conta);
-
-          var globalOffset=dominoGame.gameBoard.firstCellPosition;
-          console.log("Global OFFSET: ",globalOffset);
+          event.preventDefault();
+          //debugger;
+          console.log("En evento mouseup");
           console.log("this:-----",this);//this is here the rotableDragable class, is the var rotable
-
-          console.log("this.style.left: ",this.style.left);
-          console.log("this.style.top: ",this.style.top);
-          //console.log(+this.getAttribute("data-x"),globalOffset.left);
-          //console.log(+this.getAttribute("data-y"),globalOffset.top);
+          console.log("this.style: ",this.style);
+          var globalOffset=dominoGame.gameBoard.firstCellPosition;
 
           var leftOffset=parseInt(this.style.left)-globalOffset.left; //offset in px from left reference
-          console.log("ofset-IZQUIERDO: ",leftOffset);
+
           var nColumn=Math.round(leftOffset/20);
-          console.log("COLUMN: ",nColumn);
 
           var topOffset=parseInt(this.style.top)-globalOffset.top; //offset in px from top reference
-          console.log("ofset-SUPERIOR: ",topOffset);
+
           var nRow=Math.round(topOffset/20);
-          console.log("ROW: ",nRow);
 
-          console.log("dominoGame.gameBoard.domino[0] es:",dominoGame.gameBoard.domino[0]);
-            // row column adjust to numberOne of domino position
-          if (aspect===1){
-            colOne=nColumn+1;
-            rowOne=nRow+1;
-            colTwo=colOne-1;
-            rowTwo=rowOne;
+          // row column adjust to numberOne of domino position
+          switch (aspect) {
+            case 1:
+              colOne=nColumn+1;
+              rowOne=nRow+1;
+              colTwo=colOne-1;
+              rowTwo=rowOne;
+            break;
+            case 2:
+              colOne=nColumn;
+              rowOne=nRow+1;
+              colTwo=colOne;
+              rowTwo=rowOne-1;
+            break;
+            case 3:
+              colOne=nColumn;
+              rowOne=nRow+1;
+              colTwo=colOne+1;
+              rowTwo=rowOne;
+            break;
+            case 4:
+              colOne=nColumn;
+              rowOne=nRow;
+              colTwo=colOne;
+              rowTwo=rowOne+1;
+            break;
+            default:
           }
-          if (aspect===2){
-            colOne=nColumn;
-            rowOne=nRow+1;
-            colTwo=colOne;
-            rowTwo=rowOne-1;
-          }
-          if (aspect===3){
-            colOne=nColumn;
-            rowOne=nRow+1;
-            colTwo=colOne+1;
-            rowTwo=rowOne;
-          }
-          if (aspect===4){
-            colOne=nColumn;
-            rowOne=nRow;
-            colTwo=colOne;
-            rowTwo=rowOne+1;
-          }
+
           console.log("par posicion y aspecto: colOne: ",colOne," colTwo: ",colTwo," rowOne: ", rowOne," rowTwo: ", rowTwo," aspect: ",aspect);
-
-          //correcting attributes of rotable (this in this context)
 
 
           dominoGame.placeDominoInBoard(name,domSelected,this,rowOne,colOne,rowTwo,colTwo,aspect);
 
+        }); // end of $('.boardtable').on('mouseup','.rotableDragable',function()
 
+    }); //end $(document).keypress(function(e)
 
-        });
-
-
-     }); //function to rotate domino
-};
+}; // end function rotateDomino
 
 
 /*nueva funcion dragRotableDomino que en vez de detectar el click para ver si
 puede dibujar ahí la pieza
 lo que hace es crear una div rotable y dragable*/
 DominoGame.prototype.dragRotableDomino=function(domSelected,name){
-  console.log("he llegado a dragRotableDomino",domSelected);
-  console.log(name);
+
 
     //crea en .boardtable una division con atributos de rotable y draggable
   $('.boardtable').on('mousedown','.cell-board',function(){
@@ -368,6 +323,8 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
      $('.boardtable .rotableDragable').append($('<div>')
        .addClass('dominonumberplaced')
        .attr('dominonumber',1)
+       .attr('number',domSelected.numberOne)
+       .attr('open',true)
        .attr('row',dataRow)
        .attr('col',dataCol)
 
@@ -376,6 +333,8 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
      $('.boardtable .rotableDragable').append($('<div>')
        .addClass('dominonumberplaced')
        .attr('dominonumber',2)
+       .attr('number',domSelected.numberTwo)
+       .attr('open',true)
        .attr('row',dataRow+1)
        .attr('col',dataCol)
 
@@ -383,12 +342,11 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
 
 
   var rotableDragable = document.getElementsByClassName('rotableDragable')[0];
-  console.log("var rotableDragable is: ",rotableDragable);
+
 
 
   //this is to construct the domino we are placing
       $('.dominonumberplaced[dominonumber=1]')[0].innerHTML=domSelected.numberOne;
-      console.log("primero",domSelected.numberOne);
       $('.dominonumberplaced[dominonumber=1]').append("<img>");
       switch (domSelected.numberOne) {
         case 0:
@@ -418,7 +376,6 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
 
   //this work
       $('.dominonumberplaced[dominonumber=2]')[0].innerHTML=domSelected.numberTwo;
-      console.log("segundo",domSelected.numberTwo); //aqui ahora this is the boardtable
       $('.dominonumberplaced[dominonumber=2]').append("<img>");
       switch (domSelected.numberTwo) {
         case 0:
@@ -445,10 +402,10 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
         default:
       }
 
-      console.log("rotabledragable es",rotableDragable);
+
       dominoGame.rotateDomino(rotableDragable,domSelected,name);
 
-       //aqui ahora this es la board
+
   }); //on mousedown clicK
 
 
@@ -458,6 +415,7 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
 /*New version, with rotable, col y row positions and aspect*/
 
 DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne,colOne,rowTwo,colTwo,aspect){
+  $('.boardtable').off('mouseup','.rotableDragable'); //prueba
 var end=dominoGame.gameBoard.domino.length-1;
  console.log("INSIDE new placeDominoInBoard function, nameplayer is:",name, "y this is: ",this);
  console.log(dominoGame.playerOne.name);
@@ -466,27 +424,33 @@ var end=dominoGame.gameBoard.domino.length-1;
  $('.dominonumberplaced[dominonumber=1]').attr("col",colOne);
  $('.dominonumberplaced[dominonumber=2]').attr("row",rowTwo);
  $('.dominonumberplaced[dominonumber=2]').attr("col",colTwo);
+
  console.log(domSelected,rotable,rowOne,colOne,rowTwo,colTwo,aspect);
  console.log(dominoGame.gameBoard.domino[0]);
+
  if (dominoGame.gameBoard.domino[0]===undefined) {
      dominoGame.gameBoard.drawDomino(rotable,domSelected,rowOne,colOne,rowTwo,colTwo);
+     dominoGame.gameBoard.insertPushDomino(rotable,domSelected);
      console.log("ejecutado drawDomino");
      if (name===dominoGame.playerOne.name) {
          console.log("era player one");
          $('#dominoesplayerone').off();
-         dominoGame.gameBoard.insertPushDomino(domSelected);
          dominoGame.movDominoPlayerOneValid();
-
-
        } else if (name===dominoGame.playerTwo.name){
          console.log("era player dos");
          $('#dominoesplayertwo').off();
-         dominoGame.gameBoard.insertPushDomino(domSelected);
          dominoGame.movDominoPlayerTwoValid();
+       }
+   } else if (dominoGame.gameBoard.movOk(rotable,dominoGame.gameBoard.domino[0])){
+                console.log("Tratamos de poner segunda ficha");
+                dominoGame.gameBoard.drawDomino(rotable,domSelected,rowOne,colOne,rowTwo,colTwo);
+                dominoGame.gameBoard.movToBegin(domSelected);
+                  }
+
+}; //end function placeDominoInBoard
 
 
-     }
-   } else if (
+              /*(
                ((dominoGame.gameBoard.graphicOk(rotable,dominoGame.gameBoard.domino[0]))&&
                (dominoGame.gameBoard.movToBegin(domSelected)))||
                ((dominoGame.gameBoard.graphicOk(rotable,dominoGame.gameBoard.domino[end]))&&
@@ -497,9 +461,9 @@ var end=dominoGame.gameBoard.domino.length-1;
                  dataCol=parseInt($(this).attr('data-col'));
                  dominoGame.drawNumbersInBoard(this,domSelected.numberOne);
                  dominoGame.drawNumbersInBoard('div[data-row="'+(dataRow+1)+'"][data-col="'+dataCol+'"]',domSelected.numberTwo);
-              }
+              }*/
 
-};
+
 
 /*Old version with posicion by click, no dragable nor rotable*/
 /*

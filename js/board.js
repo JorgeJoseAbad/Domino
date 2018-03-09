@@ -10,14 +10,15 @@
 
 //New function newGraphicOk to check graphically correct movement
 //with consideration of position and orientation of domino
-Board.prototype.drawDomino=function(rotable,domSelected,rowOne,colOne,rowTwo,colTwo){
+Board.prototype.drawDomino=function(rotable,domSelected){
   console.log("ESTAMOS EN drawDomino function");
   console.log("Rotable: ", rotable);
   console.log("domSelected ",domSelected); //orientacion del domino puesto
-  console.log("rowOne ",rowOne); //posicion del domino puesto
-  console.log("colOne ",colOne);//domino puesto
-  console.log("rowTwo ",rowTwo);//array de dominoes ya puestos
-  console.log("colTwo ",colTwo);
+
+  rowOne=rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('row');
+  colOne=rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('col');
+  rowTwo=rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('row');
+  colTwo=rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('col');
 
   $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]")[0].innerHTML=+domSelected.numberOne;
   $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").addClass("occupied").append("<img>");
@@ -81,24 +82,38 @@ Board.prototype.drawDomino=function(rotable,domSelected,rowOne,colOne,rowTwo,col
 
 
 //Function to check graphically correct movement
-Board.prototype.graphicOk=function(rotable,snakeDom){
-  var nUno,nDos;
+Board.prototype.movOk=function(rotable,freeDomino){
+
+
   console.log("Estamos en graphicOK");
-  console.log(rotable);
-  nUno=rotable.getElementsByClassName('dominonumberplaced')[0].val;
-  nDos=rotable.getElementsByClassName('dominonumberplaced')[1].val;
-  console.log(nUno,nDos);
-  console.log($('.rotableDragable'));
-  console.log(snakeDom);
+  console.log("rotable (new Domino to place) and proposed freeDomino are:",rotable,freeDomino);
+  var valueRotableUno=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].firstChild.data);
+  var rowRotableUno=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('row'));
+  var colRotableUno=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('col'));
+  var valueRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].firstChild.data);
+  var rowRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('row'));
+  var colRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('col'));
 
   //verify mov posible to begin of snake
-  /*if((newDom.numberOne===snakeDom.numberOne)&&
-      ||
+  if(
+      (valueRotableUno===freeDomino.numberOne)&&
+      (freeDomino.numberOneOpen)&&
+      ((rowRotableUno===freeDomino.numberOnePos.row)||(colRotableUno===freeDomino.numberOnePos.column))
+    )
+      {
+        console.log("Encaja numero Uno");
+        return true;
+      }
+  if(
+      (valueRotableTwo===freeDomino.numberTwo)&&
+      (freeDomino.numberTwoOpen)&&
+      ((rowRotableTwo==freeDomino.numberTwoPos.row)||(colRotableTwo===freeDomino.numberTwoPos.column))
+    )
+      {
+        console.log("Encaja numero Dos");
+      }
 
 
-  ){
-
-  };*/
 
 
 /*
@@ -133,8 +148,6 @@ Board.prototype.graphicOk=function(rotable,snakeDom){
 // Move domino to begin of array in board
   Board.prototype.movToBegin=function(selectedDomino){
 
-
-      //debugger;
       switch  (this.domino[0].numberOneOpen||this.domino[0].numberTwoOpen)
 
             {
@@ -159,7 +172,7 @@ Board.prototype.graphicOk=function(rotable,snakeDom){
                     this.domino.unshift(selectedDomino);
                 break;
               default: {
-                //debugger;
+
 
                 return false;
               }
@@ -233,9 +246,25 @@ Board.prototype.impresionPrueba=function(mensaje){
 };
 
 //funcions for test
-    Board.prototype.insertPushDomino=function(domino){
+    Board.prototype.insertPushDomino=function(domDomino,newDomino){
 
-        this.domino.push(domino);
+        console.log("pieza DOM de domino: ",domDomino);
+        console.log("pieza domino: ",newDomino);
+        var rowOne,colOne,rowTwo,colTwo;
+        var numberOne,numberTwo;
+        numberOne=domDomino.getElementsByClassName('dominonumberplaced')[0];
+        numberTwo=domDomino.getElementsByClassName('dominonumberplaced')[1];
+        rowNumberOne=numberOne.getAttribute('row');
+        colNumberOne=numberOne.getAttribute('col');
+        rowNumberTwo=numberTwo.getAttribute('row');
+        colNumberTwo=numberTwo.getAttribute('col');
+
+        newDomino.numberOnePos.row=parseInt(rowNumberOne);
+        newDomino.numberOnePos.column=parseInt(colNumberOne);
+        newDomino.numberTwoPos.row=parseInt(rowNumberTwo);
+        newDomino.numberTwoPos.column=parseInt(colNumberTwo);
+
+        this.domino.push(newDomino);
         console.log(this.domino);
         return true;
       /*var snake;
