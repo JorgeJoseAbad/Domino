@@ -191,7 +191,7 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
 
       var angleMode=0;
       var angle = 0;
-      var definedPos=false;
+
       var colOne, colTwo, rowOne, rowTwo;
       var aspect=0;
 
@@ -243,19 +243,15 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
 
       $('.boardtable').on('mouseup','.rotableDragable',function(){
 
-        definedPos=true;
+
         console.log(aspect);
-        if (angleMode===1) dominoGame.generateCoordsOfPlacedDomino(this,domSelected,aspect);
+        if (angleMode===1) dominoGame.generateCoordsOfPlacedDomino(this,domSelected,aspect,name);
         //debugger;
       });
 
-
-
-  console.log("PARA VER SI ESTO SE HACE");
 }; // end function rotateDomino
-         //dentro de la funcion que permite rotar, detectamos el levantamiento del mouse
-         //para indicar posición elegida por el jugador
-DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSelected,aspect){
+
+DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSelected,aspect,playername){
 
           //debugger;
 
@@ -306,7 +302,7 @@ DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSe
           console.log("par posicion y aspecto: colOne: ",colOne," colTwo: ",colTwo," rowOne: ", rowOne," rowTwo: ", rowTwo," aspect: ",aspect);
 
 
-          dominoGame.placeDominoInBoard(name,domSelected,rotableDragable,rowOne,colOne,rowTwo,colTwo,aspect);
+          dominoGame.placeDominoInBoard(playername,domSelected,rotableDragable,rowOne,colOne,rowTwo,colTwo,aspect);
 
 
 }; // end of function generateCoordsOfPlacedDomino
@@ -433,21 +429,21 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
 /*New version, with rotable, col y row positions and aspect*/
 
 DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne,colOne,rowTwo,colTwo,aspect){
-  $('.boardtable').off('mouseup','.rotableDragable'); //prueba
-var end=dominoGame.gameBoard.domino.length-1;
- console.log("INSIDE new placeDominoInBoard function, nameplayer is:",name, "y this is: ",this);
- console.log(dominoGame.playerOne.name);
- console.log(dominoGame.playerTwo.name);
+ console.log("In placeDominoInBoard function");
+
+ $('.boardtable').off('mouseup','.rotableDragable'); //prueba
+ var end=dominoGame.gameBoard.domino.length-1;
+
  $('.dominonumberplaced[dominonumber=1]').attr("row",rowOne);
  $('.dominonumberplaced[dominonumber=1]').attr("col",colOne);
  $('.dominonumberplaced[dominonumber=2]').attr("row",rowTwo);
  $('.dominonumberplaced[dominonumber=2]').attr("col",colTwo);
 
- console.log(domSelected,rotable,rowOne,colOne,rowTwo,colTwo,aspect);
+ console.log(domSelected,rotable);
  console.log(dominoGame.gameBoard.domino[0]);
 
  if (dominoGame.gameBoard.domino[0]===undefined) {
-     dominoGame.gameBoard.drawDomino(rotable,domSelected,rowOne,colOne,rowTwo,colTwo);
+     dominoGame.gameBoard.drawDomino(rotable,domSelected);
      dominoGame.gameBoard.insertPushDomino(rotable,domSelected);
      console.log("ejecutado drawDomino");
      if (name===dominoGame.playerOne.name) {
@@ -459,9 +455,9 @@ var end=dominoGame.gameBoard.domino.length-1;
          $('#dominoesplayertwo').off();
          dominoGame.movDominoPlayerTwoValid();
        }
-   } else if (dominoGame.gameBoard.movOk(rotable,dominoGame.gameBoard.domino[0])){
+   } else if (dominoGame.gameBoard.boardMovOk(rotable,aspect)){
                 console.log("Tratamos de poner segunda ficha");
-                dominoGame.gameBoard.drawDomino(rotable,domSelected,rowOne,colOne,rowTwo,colTwo);
+                dominoGame.gameBoard.drawDomino(rotable,domSelected);
                 dominoGame.gameBoard.movToBegin(domSelected);
                   }
 

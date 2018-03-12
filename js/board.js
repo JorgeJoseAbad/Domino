@@ -82,38 +82,163 @@ Board.prototype.drawDomino=function(rotable,domSelected){
 
 
 //Function to check graphically correct movement
-Board.prototype.movOk=function(rotable,freeDomino){
-
-
-  console.log("Estamos en graphicOK");
-  console.log("rotable (new Domino to place) and proposed freeDomino are:",rotable,freeDomino);
-  var valueRotableUno=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].firstChild.data);
-  var rowRotableUno=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('row'));
-  var colRotableUno=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('col'));
+Board.prototype.boardMovOk=function(rotable,aspect){
+  console.log("Estamos en boardMovOk");
+  console.log("rotable (new Domino to place) and aspect are:",rotable,aspect);
+  var valueRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].firstChild.data);
+  var rowRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('row'));
+  var colRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('col'));
   var valueRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].firstChild.data);
   var rowRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('row'));
   var colRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('col'));
-
+debugger;
   //verify mov posible to begin of snake
-  if(
-      (valueRotableUno===freeDomino.numberOne)&&
-      (freeDomino.numberOneOpen)&&
-      ((rowRotableUno===freeDomino.numberOnePos.row)||(colRotableUno===freeDomino.numberOnePos.column))
+  if(aspect===1){
+    if (($('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]').length===0)&&
+    (
+         ($('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]')[0].innerText==valueRotableOne
+         )||
+         ( $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne
+         )||
+         ( $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne)
     )
-      {
-        console.log("Encaja numero Uno");
-        return true;
-      }
-  if(
-      (valueRotableTwo===freeDomino.numberTwo)&&
-      (freeDomino.numberTwoOpen)&&
-      ((rowRotableTwo==freeDomino.numberTwoPos.row)||(colRotableTwo===freeDomino.numberTwoPos.column))
+  ){
+      console.log("Movimiento correcto con numero uno");
+      return true;
+  }
+  else if (($('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo+1)+'"]').length===0)&&
+  (
+    $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]')[0].innerText==valueRotableTwo
+    )||
+    ( $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]')[0].innerText==valueRotableTwo
+    )||
+    ( $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]')[0].innerText==valueRotableTwo)
+
+  ) {
+       console.log("movimiento correcto con numero dos");
+       return true;
+    }
+    else {console.log("movimiento incorrecto");
+      return false;
+    }
+ } //aspect===1
+
+  if(aspect===2){
+    if (($('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]').length===0)&&
+    (
+         ($('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne
+         )||
+         ( $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne+1)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne+1)+'"]')[0].innerText==valueRotableOne
+         )||
+         ( $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne-1)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne-1)+'"]')[0].innerText==valueRotableOne)
     )
-      {
-        console.log("Encaja numero Dos");
-      }
+  ){
+      console.log("Movimiento correcto con numero uno");
+      return true;
+  }
+  else if (($('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]').length===0)&&
+  (
+    $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]')[0].innerText==valueRotableTwo
+    )||
+    ( $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo+1)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo+1)+'"]')[0].innerText==valueRotableTwo
+    )||
+    ( $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo-1)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo-1)+'"]')[0].innerText==valueRotableTwo)
+
+  ) {
+       console.log("movimiento correcto con numero dos");
+       return true;
+    }
+    else {console.log("movimiento incorrecto");
+      return false;
+    }
+
+  }//aspect 2
+  if(aspect===3){
+    if (($('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]').length===0)&&
+    (
+         ($('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]')[0].innerText==valueRotableOne
+         )||
+         ( $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne
+         )||
+         ( $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne)
+    )
+  ){
+      console.log("Movimiento correcto con numero uno");
+      return true;
+  }
+  else if (($('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]').length===0)&&
+  (
+    $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo+1)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo+1)+'"]')[0].innerText==valueRotableTwo
+    )||
+    ( $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]')[0].innerText==valueRotableTwo
+    )||
+    ( $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]')[0].innerText==valueRotableTwo)
+
+  ) {
+       console.log("movimiento correcto con numero dos");
+       return true;
+    }
+    else {console.log("movimiento incorrecto");
+      return false;
+    }
+  }
+  if(aspect===4){
+    if (($('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]').length===0)&&
+    (
+         ($('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]')[0].innerText==valueRotableOne
+         )||
+         ( $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne
+         )||
+         ( $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne-1)+'"]')[0]!==undefined&&
+           $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne-1)+'"]')[0].innerText==valueRotableOne)
+    )
+  ){
+      console.log("Movimiento correcto con numero uno");
+      return true;
+  }
+  else if (($('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]').length===0)&&
+  (
+    $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]')[0].innerText==valueRotableTwo
+    )||
+    ( $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]')[0].innerText==valueRotableTwo
+    )||
+    ( $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo+1)+'"]')[0]!==undefined&&
+      $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo+1)+'"]')[0].innerText==valueRotableTwo)
+
+  ) {
+       console.log("movimiento correcto con numero dos");
+       return true;
+    }
+    else {console.log("movimiento incorrecto");
+      return false;
+    }
+  }
 
 
+
+};
 
 
 /*
@@ -142,7 +267,7 @@ Board.prototype.movOk=function(rotable,freeDomino){
 
      return false;
    }*/
-};
+
 
 
 // Move domino to begin of array in board
@@ -252,12 +377,12 @@ Board.prototype.impresionPrueba=function(mensaje){
         console.log("pieza domino: ",newDomino);
         var rowOne,colOne,rowTwo,colTwo;
         var numberOne,numberTwo;
-        numberOne=domDomino.getElementsByClassName('dominonumberplaced')[0];
-        numberTwo=domDomino.getElementsByClassName('dominonumberplaced')[1];
-        rowNumberOne=numberOne.getAttribute('row');
-        colNumberOne=numberOne.getAttribute('col');
-        rowNumberTwo=numberTwo.getAttribute('row');
-        colNumberTwo=numberTwo.getAttribute('col');
+        numberOneDOMelement=domDomino.getElementsByClassName('dominonumberplaced')[0];
+        numberTwoDOMelement=domDomino.getElementsByClassName('dominonumberplaced')[1];
+        rowNumberOne=numberOneDOMelement.getAttribute('row');
+        colNumberOne=numberOneDOMelement.getAttribute('col');
+        rowNumberTwo=numberTwoDOMelement.getAttribute('row');
+        colNumberTwo=numberTwoDOMelement.getAttribute('col');
 
         newDomino.numberOnePos.row=parseInt(rowNumberOne);
         newDomino.numberOnePos.column=parseInt(colNumberOne);
@@ -267,11 +392,7 @@ Board.prototype.impresionPrueba=function(mensaje){
         this.domino.push(newDomino);
         console.log(this.domino);
         return true;
-      /*var snake;
-      snake=this.domino.push(domino);
-      console.log('snake');
-      console.log(snake);
-      console.log('snake2');*/
+
     };
 
 //function for test
