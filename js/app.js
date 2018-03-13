@@ -444,7 +444,7 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
 
  if (dominoGame.gameBoard.domino[0]===undefined) {
      dominoGame.gameBoard.drawDomino(rotable,domSelected);
-     dominoGame.gameBoard.insertPushDomino(rotable,domSelected);
+     dominoGame.gameBoard.insertFirstDomino(rotable,domSelected);
      console.log("ejecutado drawDomino");
      if (name===dominoGame.playerOne.name) {
          console.log("era player one");
@@ -455,11 +455,63 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
          $('#dominoesplayertwo').off();
          dominoGame.movDominoPlayerTwoValid();
        }
-   } else if (dominoGame.gameBoard.boardMovOk(rotable,aspect)){
+   }
+      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[0].numberOne)){
                 console.log("Tratamos de poner segunda ficha");
                 dominoGame.gameBoard.drawDomino(rotable,domSelected);
-                dominoGame.gameBoard.movToBegin(domSelected);
+                dominoGame.gameBoard.movToBegin(rotable,domSelected,"1");
+                if (name===dominoGame.playerOne.name) {
+                    console.log("era player one");
+                    $('#dominoesplayerone').off();
+                    dominoGame.movDominoPlayerOneValid();
+                  } else if (name===dominoGame.playerTwo.name){
+                    console.log("era player dos");
+                    $('#dominoesplayertwo').off();
+                    dominoGame.movDominoPlayerTwoValid();
                   }
+      }
+      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[0].numberTwo)) {
+        console.log("Tratamos de poner segunda ficha");
+        dominoGame.gameBoard.drawDomino(rotable,domSelected);
+        dominoGame.gameBoard.movToBegin(rotable,domSelected,"2");
+        if (name===dominoGame.playerOne.name) {
+            console.log("era player one");
+            $('#dominoesplayerone').off();
+            dominoGame.movDominoPlayerOneValid();
+          } else if (name===dominoGame.playerTwo.name){
+            console.log("era player dos");
+            $('#dominoesplayertwo').off();
+            dominoGame.movDominoPlayerTwoValid();
+          }
+      }
+      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[end].numberOne)) {
+        console.log("Tratamos de poner segunda ficha");
+        dominoGame.gameBoard.drawDomino(rotable,domSelected);
+        dominoGame.gameBoard.movToEnd(rotable,domSelected,"1");
+        if (name===dominoGame.playerOne.name) {
+            console.log("era player one");
+            $('#dominoesplayerone').off();
+            dominoGame.movDominoPlayerOneValid();
+          } else if (name===dominoGame.playerTwo.name){
+            console.log("era player dos");
+            $('#dominoesplayertwo').off();
+            dominoGame.movDominoPlayerTwoValid();
+          }
+      }
+      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[end].numberTwo)) {
+        console.log("Tratamos de poner segunda ficha");
+        dominoGame.gameBoard.drawDomino(rotable,domSelected);
+        dominoGame.gameBoard.movToEnd(rotable,domSelected,"2");
+        if (name===dominoGame.playerOne.name) {
+            console.log("era player one");
+            $('#dominoesplayerone').off();
+            dominoGame.movDominoPlayerOneValid();
+          } else if (name===dominoGame.playerTwo.name){
+            console.log("era player dos");
+            $('#dominoesplayertwo').off();
+            dominoGame.movDominoPlayerTwoValid();
+          }
+      }
 
 }; //end function placeDominoInBoard
 
