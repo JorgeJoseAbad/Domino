@@ -179,7 +179,7 @@ body{
 .dominoplayerone,.dominoplayertwo {
   float: left;
   height: 40px;
-  width: 30px;
+  width: 22px;
   border: 1px;
   border-color: black;
   font-weight: bold;
@@ -189,10 +189,10 @@ body{
   text-align: center;
 }
 
-.dominoplayertwo.filled,.dominoplayerone.filled{
+.dominoplayerone.filled,.dominoplayertwo.filled{
   float: left;
   height: 40px;
-  width: 30px;
+  width: 22px;
   border: 1px;
   border-color: black;
   font-weight: bold;
