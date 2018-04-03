@@ -163,7 +163,7 @@ Board.prototype.drawDomino=function(rotable,domSelected){
   }
 
   if (extremeOne!==null) $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").attr('extreme',extremeOne);
-  if (extremeTwo!==null) $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").attr('extreme',extremeOne);
+  if (extremeTwo!==null) $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").attr('extreme',extremeTwo);
 
   $(".rotableDragable").remove(); //para indicar que est
 
@@ -218,7 +218,7 @@ Board.prototype.beginOrEndFunction=function(rotable,aspect){
 
 Board.prototype.placeDominoAtStart=function(rotable,aspect){
 
-  console.log("Estamos en boardMovOk");
+  console.log("Estamos en placeDominoAtStart");
   console.log("rotable (new Domino to place) and aspect are:",rotable,aspect);
   var valueRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].firstChild.data);
   var rowRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('row'));
@@ -354,7 +354,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
      }
   //aspect 2
 
-   //aspect 3
+  //aspect 3
   if((aspect===3)&&($('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]').length===0)){
       if
          (
@@ -371,8 +371,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
            $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
            $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne&&
            $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0].getAttribute('extreme')=='start'
-         )
-         {
+         ) {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
              return true;
@@ -382,8 +381,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
            $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
            $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne&&
            $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0].getAttribute('extreme')=='start'
-         )
-           {
+         ) {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
              return true;
@@ -497,7 +495,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
 
 Board.prototype.placeDominoAtEnd=function(rotable,aspect){
 
-  console.log("Estamos en boardMovOk");
+  console.log("Estamos en placeDominoAtEnd");
   console.log("rotable (new Domino to place) and aspect are:",rotable,aspect);
   var valueRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].firstChild.data);
   var rowRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('row'));
@@ -651,7 +649,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
            $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0].innerText==valueRotableOne&&
            $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]')[0].getAttribute('extreme')=='end'
          )
-         {
+           {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
              return true;

@@ -429,7 +429,7 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
 /*New version, with rotable, col y row positions and aspect*/
 
 DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne,colOne,rowTwo,colTwo,aspect){
-  var endOrBegin;
+ var endOrBegin;
  console.log("In placeDominoInBoard function");
 
  $('.boardtable').off('mouseup','.rotableDragable'); //prueba
@@ -465,194 +465,33 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
                     console.log("era player one");
                     $('#dominoesplayerone').off();
                     dominoGame.movDominoPlayerOneValid();
+                    dominoGame.gameOver(playerOne);
                   } else if (name===dominoGame.playerTwo.name){
                     console.log("era player dos");
                     $('#dominoesplayertwo').off();
                     dominoGame.movDominoPlayerTwoValid();
+                    dominoGame.gameOver(playerTwo);
                   }
       }
       else if (dominoGame.gameBoard.placeDominoAtEnd(rotable,aspect)){
                 console.log("Tratamos de poner segunda ficha");
                 dominoGame.gameBoard.drawDomino(rotable,domSelected);
-                dominoGame.gameBoard.movToEnd(rotable,domSelected,"1");
+                dominoGame.gameBoard.movToEnd(rotable,domSelected);
                 if (name===dominoGame.playerOne.name) {
                     console.log("era player one");
                     $('#dominoesplayerone').off();
                     dominoGame.movDominoPlayerOneValid();
+                    dominoGame.gameOver(playerOne);
                   } else if (name===dominoGame.playerTwo.name){
                     console.log("era player dos");
                     $('#dominoesplayertwo').off();
                     dominoGame.movDominoPlayerTwoValid();
+                    dominoGame.gameOver(playerTwo);
                   }
-      }
-
-      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[0].numberTwo)=='start') {
-        console.log("Tratamos de poner segunda ficha");
-        dominoGame.gameBoard.drawDomino(rotable,domSelected);
-        dominoGame.gameBoard.movToBegin(rotable,domSelected,"2");
-        if (name===dominoGame.playerOne.name) {
-            console.log("era player one");
-            $('#dominoesplayerone').off();
-            dominoGame.movDominoPlayerOneValid();
-          } else if (name===dominoGame.playerTwo.name){
-            console.log("era player dos");
-            $('#dominoesplayertwo').off();
-            dominoGame.movDominoPlayerTwoValid();
-          }
-      }
-      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[0].numberTwo)=='end') {
-        console.log("Tratamos de poner segunda ficha");
-        dominoGame.gameBoard.drawDomino(rotable,domSelected);
-        dominoGame.gameBoard.movToEnd(rotable,domSelected,"2");
-        if (name===dominoGame.playerOne.name) {
-            console.log("era player one");
-            $('#dominoesplayerone').off();
-            dominoGame.movDominoPlayerOneValid();
-          } else if (name===dominoGame.playerTwo.name){
-            console.log("era player dos");
-            $('#dominoesplayertwo').off();
-            dominoGame.movDominoPlayerTwoValid();
-          }
-      }
-      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[end].numberOne)=='start') {
-        console.log("Tratamos de poner segunda ficha");
-        dominoGame.gameBoard.drawDomino(rotable,domSelected);
-        dominoGame.gameBoard.movToBegin(rotable,domSelected,"1");
-        if (name===dominoGame.playerOne.name) {
-            console.log("era player one");
-            $('#dominoesplayerone').off();
-            dominoGame.movDominoPlayerOneValid();
-          } else if (name===dominoGame.playerTwo.name){
-            console.log("era player dos");
-            $('#dominoesplayertwo').off();
-            dominoGame.movDominoPlayerTwoValid();
-          }
-      }
-      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[end].numberOne)=='end') {
-        console.log("Tratamos de poner segunda ficha");
-        dominoGame.gameBoard.drawDomino(rotable,domSelected);
-        dominoGame.gameBoard.movToEnd(rotable,domSelected,"1");
-        if (name===dominoGame.playerOne.name) {
-            console.log("era player one");
-            $('#dominoesplayerone').off();
-            dominoGame.movDominoPlayerOneValid();
-          } else if (name===dominoGame.playerTwo.name){
-            console.log("era player dos");
-            $('#dominoesplayertwo').off();
-            dominoGame.movDominoPlayerTwoValid();
-          }
-      }
-      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[end].numberTwo)=='start') {
-        console.log("Tratamos de poner segunda ficha");
-        dominoGame.gameBoard.drawDomino(rotable,domSelected);
-        dominoGame.gameBoard.movToBegin(rotable,domSelected,"2");
-        if (name===dominoGame.playerOne.name) {
-            console.log("era player one");
-            $('#dominoesplayerone').off();
-            dominoGame.movDominoPlayerOneValid();
-          } else if (name===dominoGame.playerTwo.name){
-            console.log("era player dos");
-            $('#dominoesplayertwo').off();
-            dominoGame.movDominoPlayerTwoValid();
-          }
-      }
-      else if (dominoGame.gameBoard.boardMovOk(rotable,aspect,dominoGame.gameBoard.domino[end].numberTwo)=='end') {
-        console.log("Tratamos de poner segunda ficha");
-        dominoGame.gameBoard.drawDomino(rotable,domSelected);
-        dominoGame.gameBoard.movToEnd(rotable,domSelected,"2");
-        if (name===dominoGame.playerOne.name) {
-            console.log("era player one");
-            $('#dominoesplayerone').off();
-            dominoGame.movDominoPlayerOneValid();
-          } else if (name===dominoGame.playerTwo.name){
-            console.log("era player dos");
-            $('#dominoesplayertwo').off();
-            dominoGame.movDominoPlayerTwoValid();
-          }
-      }
+        }
 
 }; //end function placeDominoInBoard
 
-
-              /*(
-               ((dominoGame.gameBoard.graphicOk(rotable,dominoGame.gameBoard.domino[0]))&&
-               (dominoGame.gameBoard.movToBegin(domSelected)))||
-               ((dominoGame.gameBoard.graphicOk(rotable,dominoGame.gameBoard.domino[end]))&&
-               (dominoGame.gameBoard.movToEnd(domSelected)))
-             ) {
-                 console.log(this); //this is the cell-board where i clicked
-                 dataRow=parseInt($(this).attr('data-row'));
-                 dataCol=parseInt($(this).attr('data-col'));
-                 dominoGame.drawNumbersInBoard(this,domSelected.numberOne);
-                 dominoGame.drawNumbersInBoard('div[data-row="'+(dataRow+1)+'"][data-col="'+dataCol+'"]',domSelected.numberTwo);
-              }*/
-
-
-
-/*Old version with posicion by click, no dragable nor rotable*/
-/*
-DominoGame.prototype.placeDominoInBoard=function(domSelected,name){
-
-  var dataRow;
-  var dataCol;
-  var end=dominoGame.gameBoard.domino.length-1; //index of last domino placed in board
-
-    $('.boardtable').on('click','.cell-board',function(){
-      console.log("dom selected es:",domSelected);
-      console.log(dominoGame.gameBoard.domino[0]);
-      if (dominoGame.gameBoard.domino[0]===undefined) {
-          dominoGame.gameBoard.insertPushDomino(domSelected); //para el primer movimento
-          console.log(this); //this is the cell-board where i clicked
-          dataRow=parseInt($(this).attr('data-row'));
-          dataCol=parseInt($(this).attr('data-col'));
-          dominoGame.drawNumbersInBoard(this,domSelected.numberOne);
-          dominoGame.drawNumbersInBoard('div[data-row="'+(dataRow+1)+'"][data-col="'+dataCol+'"]',domSelected.numberTwo);
-          if (name===playerOne.name) {
-              dominoGame.movDominoPlayerOneValid();
-              $('#dominoesplayerone').off();
-            } else if (name===playerTwo.name){
-              dominoGame.movDominoPlayerTwoValid();
-              $('#dominoesplayertwo').off();
-          }
-
-        } else if (
-                    ((dominoGame.gameBoard.graphicOk(this,domSelected,dominoGame.gameBoard.domino[0]))&&
-                    (dominoGame.gameBoard.movToBegin(domSelected)))||
-                    ((dominoGame.gameBoard.graphicOk(this,domSelected,dominoGame.gameBoard.domino[end]))&&
-                    (dominoGame.gameBoard.movToEnd(domSelected)))
-                  ) {
-            console.log(this); //this is the cell-board where i clicked
-            dataRow=parseInt($(this).attr('data-row'));
-            dataCol=parseInt($(this).attr('data-col'));
-            dominoGame.drawNumbersInBoard(this,domSelected.numberOne);
-            dominoGame.drawNumbersInBoard('div[data-row="'+(dataRow+1)+'"][data-col="'+dataCol+'"]',domSelected.numberTwo);
-            if (name===playerOne.name) {
-                dominoGame.movDominoPlayerOneValid();
-                dominoGame.gameOver(playerOne);
-                $('#dominoesplayerone').off();
-              } else if (name===playerTwo.name){
-                dominoGame.movDominoPlayerTwoValid();
-                dominoGame.gameOver(playerTwo);
-                $('#dominoesplayertwo').off();
-              }
-            } else {
-                    if (name===playerOne.name){
-                      dominoGame.playerOne.addDomino(domSelected);
-                      $('#dominoesplayerone').off();
-                      dominoGame.repeatPlayerOneMov();
-
-                    } else if (name===playerTwo.name){
-                      dominoGame.playerTwo.addDomino(domSelected);
-                      $('#dominoesplayertwo').off();
-                      dominoGame.repeatPlayerTwoMov();
-
-                    }
-                  }
-                  console.log(dominoGame.gameBoard.domino);
-            }); // end onclic event
-
-    }; //end function placeDominoInBoard
-*/
 
     var dominoGame = new DominoGame({
       playerOne:playerOne,
