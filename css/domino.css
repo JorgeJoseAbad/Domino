@@ -36,9 +36,9 @@ body{
 #player-area{
   position:absolute;
   margin-top: -420px;
-  margin-left: 720px;
+  margin-left: 640px;
   height: 400px;
-  width: 240px;
+  width: 180px;
   border: 1px solid blue;
 }
 
@@ -148,7 +148,7 @@ body{
   margin: 20px auto;
   padding-top: 20px;
   height: auto;
-  width: 240px;
+  width: inherit;
   background-color: #2373ec;
 }
 

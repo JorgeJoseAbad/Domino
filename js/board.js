@@ -167,10 +167,9 @@ Board.prototype.drawDomino=function(rotable,domSelected){
 
   $(".rotableDragable").remove(); //para indicar que est
 
-
 };
 /*newwwww*/
-
+/*
 Board.prototype.beginOrEndFunction=function(rotable,aspect){
   var valueRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].firstChild.data);
   var rowRotableOne=parseInt(rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('row'));
@@ -215,6 +214,7 @@ Board.prototype.beginOrEndFunction=function(rotable,aspect){
     else return 'start';
   }
 };
+*/
 
 Board.prototype.placeDominoAtStart=function(rotable,aspect){
 
