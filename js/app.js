@@ -136,8 +136,6 @@ DominoGame.prototype.repeatPlayerOneMov=function(){
 // Game select playerTwo's domino
 DominoGame.prototype.selecDominoPlayerTwo=function(){
 
-
-
     $('#dominoesplayertwo').on('click', ".dominoplayertwo.filled", function() {
       var selectedDomino;
       var numberSelectedDomino;
@@ -148,7 +146,7 @@ DominoGame.prototype.selecDominoPlayerTwo=function(){
       dominoGame.playerTwo.removePlayerDominoes();
       dominoGame.playerTwo.showPlayerDominoes();
       dominoGame.dragRotableDomino(selectedDomino,dominoGame.playerTwo.name);
-//prueba aqui poniendo dragRotableDomino
+
     }); //end onclick event
 
   }; // End selectedDomino function
@@ -175,17 +173,6 @@ DominoGame.prototype.selecDominoPlayerTwo=function(){
   };
 
 
-//funcion actualmente no operativa
-DominoGame.prototype.drawNumbersInBoard=function(rowPosition,colPosition,aspect,domSelected){
-  console.log("IN newDrawNumbersInBoard, row, col, aspect, number: ",rowPosition,colPosition,aspect,domSelected);
-  if (aspect===2) {console.log("aspect 2: ",rowPosition,colPosition,domSelected.numberTwo);}
-  if (aspect===4) {console.log("aspect 4: ",rowPosition,colPosition,domSelected.numberOne);}
-  if (aspect===1) {console.log("aspect 1: ",rowPosition,colPosition,domSelected.numberTwo);}
-  if (aspect===3) {console.log("aspect 3: ",rowPosition,colPosition,domSelected.numberOne);}
-};
-
-
-
 
 DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
 
@@ -194,6 +181,10 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
 
       var colOne, colTwo, rowOne, rowTwo;
       var aspect=0;
+      //prueba
+        var top=parseInt(rotable.style.marginTop)+dominoGame.gameBoard.firstCellPosition.top;
+        var left=parseInt(rotable.style.marginLeft)+dominoGame.gameBoard.firstCellPosition.left;
+      //prueba
 
       $('.boardtable').off(); //esta bien, para eliminar el evento on actual
                               //(que pone la ficha seleccionada) sobre la tabla
@@ -203,16 +194,24 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
            grid: [ 10, 10 ],
          }
        );
+       debugger;
+
+       $('.rotableDragable')
+         .css('marginLeft',0+'px')
+         .css('left',left+'px');
+       $('.rotableDragable')
+         .css('marginTop',0+'px')
+         .css('top',top+'px');
+
 
     $(document).keypress(function(e) {
 
       //To reset margin of domino and be able to move in all the table after first placement of domino.
-      $('.rotableDragable').css(
-        'marginLeft',0+'px'//experimental
-      );
-      $('.rotableDragable').css(
-        'marginTop',0+'px'
-      );
+      $('.rotableDragable')
+        .css('marginLeft',0+'px');
+
+      $('.rotableDragable')
+        .css('marginTop',0+'px');
 
       var mode=(angleMode===0) ? angle=0 : angle=(angle+90);
         angleMode=1;
@@ -235,14 +234,12 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
                   }
             break;
         default:
-
         }
         console.log("angle, grados: ",angle);
         console.log("aspect, orientacion: ", aspect);
       }); //end $(document).keypress(function(e)
 
       $('.boardtable').on('mouseup','.rotableDragable',function(){
-
 
         console.log(aspect);
         if (angleMode===1) dominoGame.generateCoordsOfPlacedDomino(this,domSelected,aspect,name);
@@ -252,8 +249,6 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
 }; // end function rotateDomino
 
 DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSelected,aspect,playername){
-
-
 
           console.log("In function generateCoordsOfPlacedDomino");
           console.log("rotableDragable inicial: ",rotableDragable);//this is here the rotableDragable class, is the var rotable
@@ -307,25 +302,20 @@ DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSe
 
 }; // end of function generateCoordsOfPlacedDomino
 
-
-
-
-
-
 /*nueva funcion dragRotableDomino que en vez de detectar el click para ver si
 puede dibujar ahí la pieza
 lo que hace es crear una div rotable y dragable*/
 DominoGame.prototype.dragRotableDomino=function(domSelected,name){
 
-
     //crea en .boardtable una division con atributos de rotable y draggable
   $('.boardtable').on('mousedown','.cell-board',function(){
       console.log("evento onclidk");
-      console.log(this); // with,'.cell-board', this is now the cell-board where i clicked
+      console.log(this); // with,'.cell-board', this is now the cell-board where I clicked
       dataRow=parseInt($(this).attr('data-row'));
       dataCol=parseInt($(this).attr('data-col'));
       console.log(dataRow);
       console.log(dataCol);
+
       $('.boardtable').append($('<div>')
         .addClass('rotableDragable')
         .attr('data-row', dataRow) //takes as atributos the datrow y datacol donde hago click
@@ -341,7 +331,6 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
        .attr('open',true)
        .attr('row',dataRow)
        .attr('col',dataCol)
-
      );
 
      $('.boardtable .rotableDragable').append($('<div>')
@@ -351,13 +340,10 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
        .attr('open',true)
        .attr('row',dataRow+1)
        .attr('col',dataCol)
-
      );
 
 
   var rotableDragable = document.getElementsByClassName('rotableDragable')[0];
-
-
 
   //this is to construct the domino we are placing
       $('.dominonumberplaced[dominonumber=1]')[0].innerHTML=domSelected.numberOne;
@@ -386,7 +372,6 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
           break;
         default:
       }
-
 
   //this work
       $('.dominonumberplaced[dominonumber=2]')[0].innerHTML=domSelected.numberTwo;
@@ -429,7 +414,7 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
 /*New version, with rotable, col y row positions and aspect*/
 
 DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne,colOne,rowTwo,colTwo,aspect){
- var endOrBegin;
+
  console.log("In placeDominoInBoard function");
 
  $('.boardtable').off('mouseup','.rotableDragable'); //prueba
@@ -490,6 +475,7 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
                   }
         } //else if placeDominoAtEnd
 
+    // from here, if a movement is not valid.
     else if (name===dominoGame.playerOne.name){
       dominoGame.playerOne.addDomino(domSelected);
       $('#dominoesplayerone').off();
