@@ -181,7 +181,8 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
   var valueRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].firstChild.data);
   var rowRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('row'));
   var colRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('col'));
-  var beginOrEnd='';
+  
+  debugger;
   //Case aspect=1 verify number one and then number two of rotable
   if((aspect===1)&&($('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]').length===0)){
 
@@ -191,6 +192,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
             ) {
                 rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
                 rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+                $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]').attr('extreme','previousStart');
                 return true;
                 }
 
@@ -200,6 +202,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
             ) {
                 rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
                 rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+                $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousStart');
                 return true;
               }
 
@@ -209,6 +212,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
             ){
                 rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
                 rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+                $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousStart');
                 return true;
               }
     }
@@ -221,6 +225,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]').attr('extreme','previousStart');
         return true;
     }
     if (
@@ -230,6 +235,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousStart');
         return true;
     }
     if(
@@ -239,6 +245,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousStart');
         return true;
     }
 
@@ -254,6 +261,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
          ){
            rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
            rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+           $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0].attr('extreme','previousStart');
            return true;
          }
          if
@@ -263,6 +271,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
          ){
             rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
             rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+            $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne+1)+'"]').attr('extreme','previousStart');
             return true;
           }
 
@@ -273,6 +282,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
           ){
               rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
               rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+              $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne-1)+'"]').attr('extreme','previousStart');
               return true;
           }
         }
@@ -285,6 +295,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
       ) {
           rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
           rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+          $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousStart');
           return true;
        }
     if
@@ -294,6 +305,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo+1)+'"]').attr('extreme','previousStart');
         return true;
      }
     if
@@ -303,6 +315,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo-1)+'"]').attr('extreme','previousStart');
         return true;
        }
      }
@@ -318,6 +331,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
          ) {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+             $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]').attr('extreme','previousStart');
              return true;
            }
       if
@@ -328,6 +342,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
          ) {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+             $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousStart');
              return true;
            }
       if
@@ -338,6 +353,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
          ) {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+             $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousStart');
              return true;
            }
         }
@@ -351,6 +367,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo+1)+'"]').attr('extreme','previousStart');
         return true;
       }
     if
@@ -360,6 +377,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousStart');
         return true;
       }
     if
@@ -369,6 +387,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
       ) {
           rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
           rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+          $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousStart');
           return true;
         }
       }
@@ -384,6 +403,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
        ) {
            rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
            rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+           $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]').attr('extreme','previousStart');
            return true;
          }
     if
@@ -395,6 +415,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
        {
            rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
            rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+           $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousStart');
            return true;
          }
     if
@@ -406,6 +427,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
          {
            rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
            rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"start");
+           $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]').attr('extreme','previousStart');
            return true;
          }
   }
@@ -418,6 +440,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo+1)+'"]').attr('extreme','previousStart');
         return true;
       }
     if
@@ -427,6 +450,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+        $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+colRotableTwo+'"]').attr('extreme','previousStart');
         return true;
       }
     if
@@ -436,6 +460,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
       ) {
           rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
           rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"start");
+          $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]').attr('extreme','previousStart');
           return true;
         }
   }
@@ -458,7 +483,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
   var rowRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('row'));
   var colRotableTwo=parseInt(rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('col'));
   var beginOrEnd='';
-
+debugger;
   //Case aspect=1 verify number one and then number two of rotable
   if((aspect===1)&&($('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]').length===0)){
 
@@ -468,6 +493,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
             ) {
                 rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
                 rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+                $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]').attr('extreme','previousEnd');
                 return true;
                 }
 
@@ -477,6 +503,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
             ) {
                 rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
                 rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+                $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousEnd');
                 return true;
               }
 
@@ -486,6 +513,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
             ){
                 rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
                 rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+                $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousEnd');
                 return true;
               }
     }
@@ -498,6 +526,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]').attr('extreme','previousStart');
         return true;
     }
     if (
@@ -507,6 +536,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousEnd');
         return true;
     }
     if(
@@ -516,6 +546,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousEnd');
         return true;
     }
 
@@ -531,6 +562,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
          ){
            rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
            rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+           $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousEnd');
            return true;
          }
          if
@@ -540,6 +572,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
          ){
             rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
             rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+            $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne+1)+'"]').attr('extreme','previousEnd');
             return true;
           }
 
@@ -550,6 +583,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
           ){
               rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
               rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+              $('.occupied[data-row="'+(rowRotableOne)+'"][data-col="'+(colRotableOne-1)+'"]').attr('extreme','previousEnd');
               return true;
           }
         }
@@ -562,6 +596,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
       ) {
           rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
           rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+          $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousEnd');
           return true;
        }
     if
@@ -571,6 +606,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo+1)+'"]').attr('extreme','previousEnd');
         return true;
      }
     if
@@ -580,6 +616,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+(rowRotableTwo)+'"][data-col="'+(colRotableTwo-1)+'"]').attr('extreme','previousEnd');
         return true;
        }
      }
@@ -595,6 +632,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
          ) {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+             $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]').attr('extreme','previousEnd');
              return true;
            }
       if
@@ -606,6 +644,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
            {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+             $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousEnd');
              return true;
            }
       if
@@ -617,6 +656,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
            {
              rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
              rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+             $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousEnd');
              return true;
            }
         }
@@ -630,6 +670,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo+1)+'"]').attr('extreme','previousEnd');
         return true;
       }
     if
@@ -639,6 +680,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousEnd');
         return true;
       }
     if
@@ -648,6 +690,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
       ) {
           rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
           rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+          $('.occupied[data-row="'+(rowRotableTwo-1)+'"][data-col="'+(colRotableTwo)+'"]').attr('extreme','previousEnd');
           return true;
         }
       }
@@ -663,6 +706,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
        ) {
            rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
            rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+           $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne-1)+'"]').attr('extreme','previousEnd');
            return true;
          }
     if
@@ -674,6 +718,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
        {
            rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
            rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+           $('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]').attr('extreme','previousEnd');
            return true;
          }
     if
@@ -685,6 +730,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
          {
            rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('open',false);
            rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('extreme',"end");
+           $('.occupied[data-row="'+rowRotableOne+'"][data-col="'+(colRotableOne+1)+'"]').attr('extreme','previousEnd');
            return true;
          }
   }
@@ -697,6 +743,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo+1)+'"]').attr('extreme','previousEnd');
         return true;
       }
     if
@@ -706,6 +753,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
     ){
         rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
         rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+        $('.occupied[data-row="'+(rowRotableTwo+1)+'"][data-col="'+colRotableTwo+'"]').attr('extreme','previousEnd');
         return true;
       }
     if
@@ -715,6 +763,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
       ) {
           rotable.getElementsByClassName('dominonumberplaced')[1].setAttribute('open',false);
           rotable.getElementsByClassName('dominonumberplaced')[0].setAttribute('extreme',"end");
+          $('.occupied[data-row="'+rowRotableTwo+'"][data-col="'+(colRotableTwo-1)+'"]').attr('extreme','previousEnd');
           return true;
         }
   }
