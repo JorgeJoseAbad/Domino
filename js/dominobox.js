@@ -95,14 +95,8 @@
       else return this.body.shift();
     };
 
-    
+
     var dominoBox = new DominoBox();
-
-
-    //functions not yet implemented
-
-
-
 
     DominoBox.prototype.letDomino = function () {
       this.body.push(item);

@@ -7,9 +7,6 @@
 
     }
 
-
-
-
     //Function that returns if there is a tab of the player's matrix, looking for their numbers.
     //If passed without number to search returns the first tab of the array
     // This function is not actually used.
@@ -78,8 +75,6 @@ Player.prototype.drawNumbersInHand=function(node,number){
     if (this.name===playerOne.name){
           for (columnsPlayerindex=0; columnsPlayerindex<this.body.length;
                                               columnsPlayerindex++){
-            /*class .dominoplayerone or .dominoplayerone.filled must be the dragable and rotable unit*/
-
 
             $('#dominoesplayerone').append($('<div>')
               .addClass('dominoplayerone')
@@ -94,14 +89,13 @@ Player.prototype.drawNumbersInHand=function(node,number){
               .addClass('dominonumberclass')
               .attr('dominonumber',2)
             );
-
+debugger;
           for (var i=0; i<this.body.length; i++){
               $('.dominoplayerone[picknumber='+i+']').addClass('filled');
               $('.dominoplayerone[picknumber="'+i+'"]')[0].childNodes[0].innerHTML= this.body[i].numberOne;
               playerOne.drawNumbersInHand($('.dominoplayerone.filled[picknumber="'+i+'"]')[0].childNodes[0],this.body[i].numberOne);
               $('.dominoplayerone[picknumber="'+i+'"]')[0].childNodes[1].innerHTML= this.body[i].numberTwo;
               playerOne.drawNumbersInHand($('.dominoplayerone.filled[picknumber="'+i+'"]')[0].childNodes[1],this.body[i].numberTwo);
-              //$('.dominoplayerone.filled[picknumber="'+i+'"]').draggable();//new, dominoplayerone filled is dragable
 
             }
 
@@ -131,7 +125,6 @@ Player.prototype.drawNumbersInHand=function(node,number){
               playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[0],this.body[j].numberOne);
               $('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1].innerHTML= this.body[j].numberTwo;
               playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1],this.body[j].numberTwo);
-              //$('.dominoplayertwo.filled[picknumber="'+j+'"]').draggable();//new, dominoplayertwo filled is dragable
             }
 
         }
@@ -149,8 +142,6 @@ Player.prototype.drawNumbersInHand=function(node,number){
 
     // Search domino by its two numbers
     Player.prototype.searchDomino = function(a,b){
-
-      console.log(this.name);
 
       for (i=0;i<this.body.length;i++){
         if ((this.body[i].numberOne===a && this.body[i].numberTwo===b)||
