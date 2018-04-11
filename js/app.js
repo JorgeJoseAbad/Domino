@@ -232,7 +232,7 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
 //function that states the position on board of sub-divs of new domino placed and rotated
 DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSelected,
   aspect,playername){
-
+debugger;
   var globalOffset=dominoGame.gameBoard.firstCellPosition;
   var leftOffset=parseInt(rotableDragable.style.left)-globalOffset.left; //offset in px from left reference
   var nColumn=Math.round(leftOffset/20);
@@ -242,22 +242,22 @@ DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSe
 // row column adjust to numberOne of domino position
   switch (aspect) {
     case 1:
-      colOne=nColumn+1;
-      rowOne=nRow+1;
+      colOne=nColumn;
+      rowOne=nRow;
       colTwo=colOne-1;
-      rowTwo=rowOne;
+      rowTwo=nRow;
     break;
     case 2:
       colOne=nColumn;
       rowOne=nRow+1;
-      colTwo=colOne;
-      rowTwo=rowOne-1;
+      colTwo=nColumn;
+      rowTwo=nRow;
     break;
     case 3:
-      colOne=nColumn;
-      rowOne=nRow+1;
-      colTwo=colOne+1;
-      rowTwo=rowOne;
+      colOne=nColumn-1;
+      rowOne=nRow;
+      colTwo=nColumn;
+      rowTwo=nRow;
     break;
     case 4:
       colOne=nColumn;
@@ -401,28 +401,23 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
                 dominoGame.gameBoard.drawDomino(rotable,domSelected);
                 dominoGame.gameBoard.movToBegin(rotable,domSelected);
                 if (name===dominoGame.playerOne.name) {
-                    console.log("era player one");
                     dominoGame.movDominoPlayerOneValid();
                     dominoGame.gameOver(playerOne);
                     $('#dominoesplayerone').off();
                   } else if (name===dominoGame.playerTwo.name){
-                    console.log("era player dos");
                     dominoGame.movDominoPlayerTwoValid();
                     dominoGame.gameOver(playerTwo);
                     $('#dominoesplayertwo').off();
                   }
       } //else if placeDominoAtStart
       else if (dominoGame.gameBoard.placeDominoAtEnd(rotable,aspect)){
-                console.log("Tratamos de poner segunda ficha");
                 dominoGame.gameBoard.drawDomino(rotable,domSelected);
                 dominoGame.gameBoard.movToEnd(rotable,domSelected);
                 if (name===dominoGame.playerOne.name) {
-                    console.log("era player one");
                     dominoGame.movDominoPlayerOneValid();
                     dominoGame.gameOver(playerOne);
                     $('#dominoesplayerone').off();
                   } else if (name===dominoGame.playerTwo.name){
-                    console.log("era player dos");
                     dominoGame.movDominoPlayerTwoValid();
                     dominoGame.gameOver(playerTwo);
                     $('#dominoesplayertwo').off();

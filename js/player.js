@@ -89,7 +89,7 @@ Player.prototype.drawNumbersInHand=function(node,number){
               .addClass('dominonumberclass')
               .attr('dominonumber',2)
             );
-debugger;
+
           for (var i=0; i<this.body.length; i++){
               $('.dominoplayerone[picknumber='+i+']').addClass('filled');
               $('.dominoplayerone[picknumber="'+i+'"]')[0].childNodes[0].innerHTML= this.body[i].numberOne;
