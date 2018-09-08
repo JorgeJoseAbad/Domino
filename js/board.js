@@ -239,7 +239,7 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
   }
   //aspect===1
 
-  //Case aspect=1 verify number one and then number two of rotable
+  //Case aspect=2 verify number one and then number two of rotable
   if((aspect===2)&&($('.occupied[data-row="'+(rowRotableOne-1)+'"][data-col="'+(colRotableOne)+'"]').length===0)){
         if(
            $('.occupied[data-row="'+(rowRotableOne+1)+'"][data-col="'+(colRotableOne)+'"]')[0]!==undefined&&
