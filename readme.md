@@ -8,4 +8,9 @@
 
 ## To start game press button. the domino pieces will be shuffled and 8 of them distributed to each player. Starting the game the player who has double 6, or player 1.
 
-## Pick dominoes from player, and place it in board with click. Then press space and move the chip with the pointer (mouse or trackpad), rotating it by pressing space (or another key). Leave it in place by lifting the pointer. If the move is incorrect, the chip returns to player. If the move is correct change turn to other player.
+##   INSTRUCTIONS: Game is running, please follow these steps to play without errors (this is a beta version).
+###Pick a domino and place it with click in the grey board.
+###Then select the piece with the pointer (mouse or trackpad) to drag it to desired position
+###Press the space bar at least once to activate the positioning and those necessary to rotate the domino piece
+###When in place and position, leave domino by lifting pointer. Sometimes click again over domino to place it and give turn to the other player.
+###If the move is incorrect, the domino piece return to player, try again!!!

@@ -56,20 +56,25 @@ DominoGame.prototype.pickNewDomino=function(){
   });
 };
 
-//Start Game
+//Start game function, gives name to players space and await button to start..
 DominoGame.prototype.startGame=function(){
-
   //update players name
   document.getElementsByClassName("nameplayer")[0].innerHTML=this.playerOne.name;
   document.getElementsByClassName("nameplayer")[1].innerHTML=this.playerTwo.name;
   //start buttton to begin the game...
   $("button.startgame").click(function(){
     document.getElementById("gamestate").innerHTML=
-      'Game is running, pick a domino and place it with click in the grey board.'+
-      ' Then press space and move the chip with the pointer (mouse or trackpad),'+
-      ' rotating it by pressing space. Leave it in place by lifting the pointer.'+
-      ' If the move is incorrect, the chip returns to player.'+
-      ' If the move is correct change turn to other player';
+
+      "INSTRUCTIONS: Game is running, please follow these steps to play without errors (this is a beta version)"+
+      "<ol>"+
+      "<li>Pick a domino and place it with click in the grey board.</li>"+
+      "<li>Then select the piece with the pointer (mouse or trackpad) to drag it to desired position</li>"+
+      "<li>Press the space bar at least once to activate the positioning and those necessary to rotate the domino piece</li>"+
+      "<li>When in place and position, leave domino by lifting pointer. Sometimes click again over domino to place it and give turn to the other player.</li>"+
+      "<li>If the move is incorrect, the domino piece return to player. Try again.</li>"+
+      "</ol>"
+      ;
+
     dominoGame.playerOne.startPlayer(dominoGame.dominoBox);
     dominoGame.playerTwo.startPlayer(dominoGame.dominoBox);
 
@@ -170,7 +175,8 @@ DominoGame.prototype.selecDominoPlayerTwo=function(){
     dominoGame.selecDominoPlayerTwo();
   };
 
-//Make dragable & rotable the domino placed on board
+//Make dragable & rotable with keypress event the domino placed on board,
+// then send it to generateCoordsOfPlacedDomino function to read the position of numbers of piece of domino
 DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
 
   var angleMode=0;
@@ -227,18 +233,20 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
     if (angleMode===1) dominoGame.generateCoordsOfPlacedDomino(this,domSelected,aspect,name);
 
   });
+
 }; // end function rotateDomino
 
 //function that states the position on board of sub-divs of new domino placed and rotated
+// then send it to placeDominoInBoard to place and draw the domino in the board
 DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSelected,
   aspect,playername){
-debugger;
+
   var globalOffset=dominoGame.gameBoard.firstCellPosition;
   var leftOffset=parseInt(rotableDragable.style.left)-globalOffset.left; //offset in px from left reference
   var nColumn=Math.round(leftOffset/20);
   var topOffset=parseInt(rotableDragable.style.top)-globalOffset.top; //offset in px from top reference
   var nRow=Math.round(topOffset/20);
-
+debugger;
 // row column adjust to numberOne of domino position
   switch (aspect) {
     case 1:
