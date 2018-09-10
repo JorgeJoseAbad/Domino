@@ -101,7 +101,9 @@ DominoGame.prototype.startGame=function(){
 // Game select playerOne's domino
 DominoGame.prototype.selecDominoPlayerOne=function(){
 
-    $('#dominoesplayerone').on('click', ".dominoplayerone.filled", function() {
+    $('#dominoesplayerone').one('click', ".dominoplayerone.filled", function() {
+      event.preventDefault();
+
       var selectedDomino;
       var numberSelectedDomino;
       numberSelectedDomino=$(this).attr('picknumber');
@@ -111,8 +113,8 @@ DominoGame.prototype.selecDominoPlayerOne=function(){
       dominoGame.playerOne.removePlayerDominoes();
       dominoGame.playerOne.showPlayerDominoes();
       dominoGame.dragRotableDomino(selectedDomino,dominoGame.playerOne.name);
-
-    });//end on click event
+      //$('#dominoesplayerone').one(); //not necessary
+    });//end one click event
 
 }; //end function
 
@@ -139,7 +141,9 @@ DominoGame.prototype.repeatPlayerOneMov=function(){
 // Game select playerTwo's domino
 DominoGame.prototype.selecDominoPlayerTwo=function(){
 
-    $('#dominoesplayertwo').on('click', ".dominoplayertwo.filled", function() {
+    $('#dominoesplayertwo').one('click', ".dominoplayertwo.filled", function() {
+      event.preventDefault();
+
       var selectedDomino;
       var numberSelectedDomino;
       numberSelectedDomino=$(this).attr('picknumber');
@@ -149,8 +153,9 @@ DominoGame.prototype.selecDominoPlayerTwo=function(){
       dominoGame.playerTwo.removePlayerDominoes();
       dominoGame.playerTwo.showPlayerDominoes();
       dominoGame.dragRotableDomino(selectedDomino,dominoGame.playerTwo.name);
+      //$('#dominoesplayertwo').one(); //not necessary
 
-    }); //end onclick event
+    }); //end one click event
 
   }; // End selectedDomino function
 
