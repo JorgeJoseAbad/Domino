@@ -69,7 +69,7 @@ DominoGame.prototype.startGame=function(){
       "<ol>"+
       "<li>Pick a domino and place it with click in the grey board.</li>"+
       "<li>Then select the piece with the pointer (mouse or trackpad) to drag it to desired position</li>"+
-      "<li>Press the space bar AT LEAST ONCE to activate the positioning and those necessary to rotate the domino piece</li>"+
+      "<li>Press the space bar AT LEAST ONCE to activate the positioning; and those necessary to rotate the domino piece</li>"+
       "<li>When in place and position, leave domino by lifting pointer. Sometimes click again over domino to place it and give turn to the other player.</li>"+
       "<li>If the move is incorrect, the domino piece return to player. Try again.</li>"+
       "</ol>"
@@ -246,7 +246,7 @@ DominoGame.prototype.generateCoordsOfPlacedDomino=function(rotableDragable,domSe
   var nColumn=Math.round(leftOffset/20);
   var topOffset=parseInt(rotableDragable.style.top)-globalOffset.top; //offset in px from top reference
   var nRow=Math.round(topOffset/20);
-debugger;
+
 // row column adjust to numberOne of domino position
   switch (aspect) {
     case 1:
