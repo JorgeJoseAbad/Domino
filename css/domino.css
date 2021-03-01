@@ -103,9 +103,11 @@ body{
   height: 40px;
   width: 20px;
   background-color: white;
-  -webkit-transition: -webkit-transform 0.2s linear;
+  transition: 0.2s linear;
+  -webkit-transition: 0.2s linear;
+  transform: translate(0px, 0px);
   -webkit-transform: translate(0px, 0px);
-        transform: translate(0px, 0px);
+
 }
 
 .rotated1 {

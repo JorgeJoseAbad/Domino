@@ -92,10 +92,13 @@ Player.prototype.drawNumbersInHand=function(node,number){
 
           for (var i=0; i<this.body.length; i++){
               $('.dominoplayerone[picknumber='+i+']').addClass('filled');
-              $('.dominoplayerone[picknumber="'+i+'"]')[0].childNodes[0].innerHTML= this.body[i].numberOne;
-              playerOne.drawNumbersInHand($('.dominoplayerone.filled[picknumber="'+i+'"]')[0].childNodes[0],this.body[i].numberOne);
-              $('.dominoplayerone[picknumber="'+i+'"]')[0].childNodes[1].innerHTML= this.body[i].numberTwo;
-              playerOne.drawNumbersInHand($('.dominoplayerone.filled[picknumber="'+i+'"]')[0].childNodes[1],this.body[i].numberTwo);
+              if ( this.body[i]!==null) {
+                $('.dominoplayerone[picknumber="'+i+'"]')[0].childNodes[0].innerHTML= this.body[i].numberOne;
+                playerOne.drawNumbersInHand($('.dominoplayerone.filled[picknumber="'+i+'"]')[0].childNodes[0],this.body[i].numberOne);
+                $('.dominoplayerone[picknumber="'+i+'"]')[0].childNodes[1].innerHTML= this.body[i].numberTwo;
+                playerOne.drawNumbersInHand($('.dominoplayerone.filled[picknumber="'+i+'"]')[0].childNodes[1],this.body[i].numberTwo);
+
+              }
 
             }
 
@@ -121,10 +124,13 @@ Player.prototype.drawNumbersInHand=function(node,number){
 
           for (var j=0; j<this.body.length; j++){
               $('.dominoplayertwo[picknumber='+j+']').addClass('filled');
-              $('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[0].innerHTML= this.body[j].numberOne;
-              playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[0],this.body[j].numberOne);
-              $('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1].innerHTML= this.body[j].numberTwo;
-              playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1],this.body[j].numberTwo);
+              if (this.body[i] !== null){
+                $('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[0].innerHTML= this.body[j].numberOne;
+                playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[0],this.body[j].numberOne);
+                $('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1].innerHTML= this.body[j].numberTwo;
+                playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1],this.body[j].numberTwo);
+
+              }
             }
 
         }
