@@ -452,7 +452,8 @@ Board.prototype.placeDominoAtStart=function(rotable,aspect){
         }
   }
 
-  else {console.log("movimiento incorrecto");
+  else {
+    document.getElementById("gamestate").innerHTML = "movimiento incorrecto"
     return false;
   }
 
@@ -752,7 +753,8 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
         }
   }
 
-  else {console.log("movimiento incorrecto");
+  else {
+    document.getElementById("gamestate").innerHTML = "movimiento incorrecto"
     return false;
   }
 

@@ -124,7 +124,7 @@ Player.prototype.drawNumbersInHand=function(node,number){
 
           for (var j=0; j<this.body.length; j++){
               $('.dominoplayertwo[picknumber='+j+']').addClass('filled');
-              if (this.body[i] !== null){
+              if (this.body[j] !== null){
                 $('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[0].innerHTML= this.body[j].numberOne;
                 playerTwo.drawNumbersInHand($('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[0],this.body[j].numberOne);
                 $('.dominoplayertwo.filled[picknumber="'+j+'"]')[0].childNodes[1].innerHTML= this.body[j].numberTwo;

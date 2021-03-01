@@ -23,12 +23,13 @@ DominoGame.prototype.endgame=function(){
 DominoGame.prototype.gameOver=function(player){
   var winner;
   if (player.body.length===0){
-    winner=player.name;
-    document.getElementById("gamestate").innerHTML=winner +' is the winner;'+
+    winner = player.name;
+    document.getElementById("gamestate").innerHTML = winner +' is the winner;'+
       ' GAME OVER';
     }
   else {
-    console.log('game again');
+
+    document.getElementById("gamestate").innerHTML= "Continua jugando";
     }
 
 };
@@ -416,10 +417,12 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
                 if (name===dominoGame.playerOne.name) {
                     dominoGame.movDominoPlayerOneValid();
                     dominoGame.gameOver(playerOne);
+                    document.getElementById("gamestate").innerHTML = "Siguiente movimiento: " + playerTwo.name;
                     $('#dominoesplayerone').off();
                   } else if (name===dominoGame.playerTwo.name){
                     dominoGame.movDominoPlayerTwoValid();
                     dominoGame.gameOver(playerTwo);
+                    document.getElementById("gamestate").innerHTML = "Siguiente movimiento: " + playerOne.name;
                     $('#dominoesplayertwo').off();
                   }
       } //else if placeDominoAtStart
@@ -429,10 +432,12 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
                 if (name===dominoGame.playerOne.name) {
                     dominoGame.movDominoPlayerOneValid();
                     dominoGame.gameOver(playerOne);
+                    document.getElementById("gamestate").innerHTML = "Siguiente movimiento: " + playerTwo.name;
                     $('#dominoesplayerone').off();
                   } else if (name===dominoGame.playerTwo.name){
                     dominoGame.movDominoPlayerTwoValid();
                     dominoGame.gameOver(playerTwo);
+                    document.getElementById("gamestate").innerHTML = "Siguiente movimiento: " + playerOne.name;
                     $('#dominoesplayertwo').off();
                   }
         } //else if placeDominoAtEnd
