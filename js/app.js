@@ -429,7 +429,6 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
                     dominoGame.movDominoPlayerTwoValid();
                     document.getElementById("gamestate").innerHTML = playerOne.name+"'s next move... ";
                     winner = dominoGame.gameOver(playerTwo);
-
                     $('#dominoesplayertwo').off();
                   }
       } //else if placeDominoAtStart

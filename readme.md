@@ -1,6 +1,6 @@
 # DominoGame
 
-## JavaScript (ES5), jQuery 3.5.1. HTML5, CSS3.
+## JavaScript (ES5). jQuery 3.5.1. HTML5. CSS3.
 ### For the handling of the DOM, native Javascript or Jquery have been used indistinctly.
 
 ## 28 Domines, two players. Enter players' names first by prompt

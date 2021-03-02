@@ -14,8 +14,8 @@
       colOne=rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('col');
       rowTwo=rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('row');
       colTwo=rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('col');
-
-      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]")[0].innerHTML=+domSelected.numberOne;
+    
+      $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]")[0].innerHTML = domSelected.numberOne;
       $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").attr('dominonumber',1);
       $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").addClass("occupied").append("<img>");
       switch (domSelected.numberOne) {
@@ -43,7 +43,7 @@
         default:
       }
 
-      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]")[0].innerHTML=+domSelected.numberTwo;
+      $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]")[0].innerHTML = domSelected.numberTwo;
       $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").attr('dominonumber',2);
       $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").addClass('occupied').append("<img>");
       switch (domSelected.numberTwo) {
@@ -90,7 +90,7 @@ Board.prototype.drawDomino=function(rotable,domSelected){
   extremeTwo=rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('extreme');
 
 
-  $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]")[0].innerHTML=+domSelected.numberOne;
+  $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]")[0].innerHTML = domSelected.numberOne;
   $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").attr('dominonumber',1);
   $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").addClass("occupied").append("<img>");
   switch (domSelected.numberOne) {
@@ -118,7 +118,7 @@ Board.prototype.drawDomino=function(rotable,domSelected){
     default:
   }
 
-  $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]")[0].innerHTML=+domSelected.numberTwo;
+  $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]")[0].innerHTML = domSelected.numberTwo;
   $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").attr('dominonumber',2);
   $(".boardtable .cell-board[data-row="+rowTwo+"][data-col="+colTwo+"]").addClass('occupied').append("<img>");
   switch (domSelected.numberTwo) {
