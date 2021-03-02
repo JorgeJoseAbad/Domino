@@ -73,7 +73,7 @@ body{
   background-color: white;
 }
 
-/*new*/
+
 .cell-board.occupied {
   background-size: contain;
   box-sizing: border-box;
@@ -82,11 +82,11 @@ body{
   width: 20px;
   background-color: white;
 }
-/*nexw*/
+
 .cell-board.occupied img{
   position:absolute;
-  margin-left: -8px;
-  margin-top: 0px;
+  margin-left: -9px;
+  margin-top: -1px;
   height: 20px;
   width: 20px;
   background-color: white;
@@ -107,8 +107,12 @@ body{
   background-color: white;
   transition: 0.2s linear;
   -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
   transform: translate(0px, 0px);
   -webkit-transform: translate(0px, 0px);
+  -moz-transform: translate(0px, 0px);
+  -o-transform: translate(0px, 0px);
 
 }
 
@@ -171,18 +175,19 @@ body{
 
 #dominoesplayerone.hide, #dominoesplayertwo.hide{
   visibility: hidden;
-  height: 40px;
-  background-color: grey;
 }
 
 .dominonumberclass{
   border: 2px;
   border-color: black;
+  height: 20px;
+  width: 20px;
+  margin: 1 solid black;
 }
 .dominoplayerone,.dominoplayertwo {
   float: left;
   height: 40px;
-  width: 22px;
+  width: 20px; 
   border: 1px;
   border-color: black;
   font-weight: bold;
@@ -195,7 +200,7 @@ body{
 .dominoplayerone.filled,.dominoplayertwo.filled{
   float: left;
   height: 40px;
-  width: 22px;
+  width: 20px;
   border: 1px;
   border-color: black;
   font-weight: bold;
@@ -247,8 +252,8 @@ body{
 
 .dominonumberclass img{
   position:absolute;
-  margin-left: -8px;
-  margin-top: 2px;
+  margin-left: -12px; /**/
+  margin-top: 0;
   height: 20px;
   width: 20px;
   background-color: white;

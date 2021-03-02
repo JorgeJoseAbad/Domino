@@ -220,7 +220,7 @@ DominoGame.prototype.rotateDomino=function(rotable,domSelected,name){
    var mode=(angleMode===0) ? angle=0 : angle=(angle+90);
      angleMode=1;
 
-   $(".rotableDragable").css("-webkit-transform", "rotate(" + angle + "deg)");
+  $(".rotableDragable").css("transform", "rotate(" + angle + "deg)");
 
    switch (angle) {
      case 0: aspect=4;
