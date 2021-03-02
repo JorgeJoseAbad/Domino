@@ -15,8 +15,8 @@
 
 //GameOver without winner (lack of dominoes)
 DominoGame.prototype.endgame=function(){
-  document.getElementById("gamestate").innerHTML='No more dominoes in box,'+
-   ' END OF GAME';
+  document.getElementById("gamestate").innerHTML='No more dominoes in box, nobody win!!.'+
+   ' GAME OVER - Reload the page to play a new game,';
    $('.picknewdomino').hide();
 };
 
@@ -25,8 +25,8 @@ DominoGame.prototype.gameOver=function(player){
   var winner;
   if (player.body.length===0){
     winner = player.name;
-    document.getElementById("gamestate").innerHTML = winner +' is the winner;'+
-      ' GAME OVER';
+    document.getElementById("gamestate").innerHTML = '¡¡¡'+ winner +' is the winner!!!. '+
+      ' GAME OVER - Reload the page to play a new game,';
     $('.picknewdomino').hide();
     return winner;
     }
@@ -96,7 +96,7 @@ DominoGame.prototype.startGame=function(){
                   dominoGame.selecDominoPlayerOne();
                   }
      dominoGame.gameBoard.drawBoard();
-     
+
      $(this).hide();
 
    });
