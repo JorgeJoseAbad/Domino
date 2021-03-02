@@ -96,6 +96,8 @@ DominoGame.prototype.startGame=function(){
                   dominoGame.selecDominoPlayerOne();
                   }
      dominoGame.gameBoard.drawBoard();
+     
+     $(this).hide();
 
    });
 
