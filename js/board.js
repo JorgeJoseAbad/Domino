@@ -754,7 +754,7 @@ Board.prototype.placeDominoAtEnd=function(rotable,aspect){
   }
 
   else {
-    document.getElementById("gamestate").innerHTML = "movimiento incorrecto"
+    document.getElementById("gamestate").innerHTML = "Wrong move..."
     return false;
   }
 

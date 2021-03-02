@@ -17,6 +17,7 @@
 DominoGame.prototype.endgame=function(){
   document.getElementById("gamestate").innerHTML='No more dominoes in box,'+
    ' END OF GAME';
+   $('.picknewdomino').hide();
 };
 
 // GameOver with winner.
@@ -26,10 +27,12 @@ DominoGame.prototype.gameOver=function(player){
     winner = player.name;
     document.getElementById("gamestate").innerHTML = winner +' is the winner;'+
       ' GAME OVER';
+    $('.picknewdomino').hide();
+    return winner;
     }
   else {
-
-    document.getElementById("gamestate").innerHTML= "Continua jugando";
+    document.getElementById("gamestate").innerHTML += " keep playing";
+    return false
     }
 
 };
@@ -391,13 +394,14 @@ DominoGame.prototype.dragRotableDomino=function(domSelected,name){
 DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne,colOne,rowTwo,colTwo,aspect){
 
  $('.boardtable').off('mouseup','.rotableDragable'); //prueba
- var end=dominoGame.gameBoard.domino.length-1;
+ var end = dominoGame.gameBoard.domino.length-1;
 
  $('.dominonumberplaced[dominonumber=1]').attr("row",rowOne);
  $('.dominonumberplaced[dominonumber=1]').attr("col",colOne);
  $('.dominonumberplaced[dominonumber=2]').attr("row",rowTwo);
  $('.dominonumberplaced[dominonumber=2]').attr("col",colTwo);
 
+  var winner = false;
 
  if (dominoGame.gameBoard.domino[0]===undefined) {
      dominoGame.gameBoard.drawFirstDomino(rotable,domSelected);
@@ -416,13 +420,14 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
                 dominoGame.gameBoard.movToBegin(rotable,domSelected);
                 if (name===dominoGame.playerOne.name) {
                     dominoGame.movDominoPlayerOneValid();
-                    dominoGame.gameOver(playerOne);
-                    document.getElementById("gamestate").innerHTML = "Siguiente movimiento: " + playerTwo.name;
+                    document.getElementById("gamestate").innerHTML = playerTwo.name+"'s next move... ";
+                    winner = dominoGame.gameOver(playerOne);
                     $('#dominoesplayerone').off();
                   } else if (name===dominoGame.playerTwo.name){
                     dominoGame.movDominoPlayerTwoValid();
-                    dominoGame.gameOver(playerTwo);
-                    document.getElementById("gamestate").innerHTML = "Siguiente movimiento: " + playerOne.name;
+                    document.getElementById("gamestate").innerHTML = playerOne.name+"'s next move... ";
+                    winner = dominoGame.gameOver(playerTwo);
+
                     $('#dominoesplayertwo').off();
                   }
       } //else if placeDominoAtStart
@@ -431,13 +436,13 @@ DominoGame.prototype.placeDominoInBoard=function(name,domSelected,rotable,rowOne
                 dominoGame.gameBoard.movToEnd(rotable,domSelected);
                 if (name===dominoGame.playerOne.name) {
                     dominoGame.movDominoPlayerOneValid();
-                    dominoGame.gameOver(playerOne);
-                    document.getElementById("gamestate").innerHTML = "Siguiente movimiento: " + playerTwo.name;
+                    document.getElementById("gamestate").innerHTML = playerTwo.name+"'s next move... ";
+                    winner = dominoGame.gameOver(playerOne);
                     $('#dominoesplayerone').off();
                   } else if (name===dominoGame.playerTwo.name){
                     dominoGame.movDominoPlayerTwoValid();
-                    dominoGame.gameOver(playerTwo);
-                    document.getElementById("gamestate").innerHTML = "Siguiente movimiento: " + playerOne.name;
+                    document.getElementById("gamestate").innerHTML = playerOne.name+"'s next move... ";
+                    winner = dominoGame.gameOver(playerTwo);
                     $('#dominoesplayertwo').off();
                   }
         } //else if placeDominoAtEnd

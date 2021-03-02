@@ -104,7 +104,7 @@ Player.prototype.drawNumbersInHand=function(node,number){
 
         }
 
-    if (this.name===playerTwo.name){
+    if (this.name === playerTwo.name){
           for (columnsPlayerindex=0; columnsPlayerindex<this.body.length;
                                               columnsPlayerindex++){
             /*class .dominoplayerone or .dominoplayerone.filled must be the dragable and rotable unit*/
