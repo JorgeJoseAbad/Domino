@@ -7,6 +7,10 @@
 
 ## Game, with ability to drag and rotate the pieces after putting them on the board
 
+## On Github pages:
+
+[Juega ahora!!](https://jorgejoseabad.github.io/Domino/)
+
 ## To start game press button. the domino pieces will be shuffled and 8 of them distributed to each player. Starting the game the player who has double 6, or player 1.
 
 ## INSTRUCTIONS: Game is running, please follow these steps to play without errors (this is a beta version).

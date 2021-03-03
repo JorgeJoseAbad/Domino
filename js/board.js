@@ -14,7 +14,7 @@
       colOne=rotable.getElementsByClassName('dominonumberplaced')[0].getAttribute('col');
       rowTwo=rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('row');
       colTwo=rotable.getElementsByClassName('dominonumberplaced')[1].getAttribute('col');
-    
+      
       $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]")[0].innerHTML = domSelected.numberOne;
       $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").attr('dominonumber',1);
       $(".boardtable .cell-board[data-row="+rowOne+"][data-col="+colOne+"]").addClass("occupied").append("<img>");

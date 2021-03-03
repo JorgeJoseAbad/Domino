@@ -84,9 +84,17 @@
 
 
     DominoBox.prototype.shuffle = function () {
-      this.body.sort(function(a, b){
-        return 0.5 - Math.random();
-      });
+      //Fisher–Yates shuffle
+        var box = this.body;
+        var j, x, i;
+        var boxLength = box.length;
+        for ( i = boxLength - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            x = box[i];
+            box[i] = box[j];
+            box[j] = x;
+          }
+        return box;
     };
 
 
